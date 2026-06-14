@@ -4,37 +4,1142 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>كشتة</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#050508;--surface:#0f0f1a;--surface2:#14141f;
-  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
-  --cyan:#00f5c8;--cyan2:rgba(0,245,200,0.08);
-  --red:#ff3b5c;--red2:rgba(255,59,92,0.1);
-  --yellow:#f5c842;--yellow2:rgba(245,200,66,0.1);
-  --orange:#ff8c42;--orange2:rgba(255,140,66,0.1);
-  --purple:#a855f7;--purple2:rgba(168,85,247,0.1);
-  --text:#f0f0f5;--text2:#8888a8;--text3:#4a4a6a;
+  --bg:#0e0b07;
+  --bg2:#13100a;
+  --surface:#1a1610;
+  --s2:#221d15;
+  --s3:#2a2419;
+  --b1:rgba(210,175,100,0.08);
+  --b2:rgba(210,175,100,0.18);
+  --b3:rgba(210,175,100,0.35);
+  --gold:#d4a843;
+  --gold2:rgba(212,168,67,0.1);
+  --gold3:rgba(212,168,67,0.06);
+  --red:#c0392b;
+  --red2:rgba(192,57,43,0.1);
+  --cyan:#2e86ab;
+  --cyan2:rgba(46,134,171,0.1);
+  --green:#27ae60;
+  --green2:rgba(39,174,96,0.1);
+  --purple:#8e44ad;
+  --purple2:rgba(142,68,173,0.1);
+  --sand:#e8d5a3;
+  --text:#f0e6cc;
+  --t2:#a89060;
+  --t3:#5a4a30;
   --mono:'Space Mono',monospace;
   --arabic:'IBM Plex Sans Arabic',sans-serif;
+  --serif:'Amiri',serif;
 }
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
-body{font-family:var(--arabic);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,200,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,200,0.018) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 50%,transparent 40%,var(--bg) 100%);pointer-events:none;z-index:1}
-.app{position:relative;z-index:10;width:min(430px,100vw);height:100dvh;max-height:900px;display:flex;flex-direction:column;overflow:hidden}
-/* TOPBAR */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 0;flex-shrink:0}
-.logo{display:flex;align-items:center;gap:8px}
-.logo-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px var(--cyan);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
-.logo-text{font-family:var(--mono);font-size:0.6rem;letter-spacing:3px;color:var(--text3);text-transform:uppercase}
-.step-txt{font-family:var(--mono);font-size:0.6rem;color:var(--text3);letter-spacing:1px}
-/* SCREENS */
-.screen{display:none;flex-direction:column;flex:1;overflow:hidden;padding:0 20px 16px}
+html,body{width:100%;height:100%;background:var(--bg);overflow:hidden}
+body{font-family:var(--arabic);color:var(--text);display:flex;align-items:center;justify-content:center;position:relative}
+
+/* Historical texture overlay */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a843' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,transparent 30%,rgba(14,11,7,0.85) 100%);
+  pointer-events:none;z-index:1;
+}
+
+.app{
+  position:relative;z-index:10;
+  width:min(440px,100vw);height:100dvh;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px 0;flex-shrink:0;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-emblem{
+  width:28px;height:28px;flex-shrink:0;
+}
+.logo-text-wrap{}
+.logo-ar{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--gold);letter-spacing:1px;line-height:1}
+.logo-en{font-family:var(--mono);font-size:0.45rem;letter-spacing:4px;color:var(--t3);text-transform:uppercase}
+.step-txt{font-family:var(--mono);font-size:0.56rem;color:var(--t3);letter-spacing:1px}
+
+/* ── SCREENS ── */
+.screens-wrap{flex:1;position:relative;overflow:hidden}
+.screen{display:none;flex-direction:column;position:absolute;inset:0;overflow-y:auto;padding:0 18px 16px;scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+.screen.active{display:flex;animation:sIn 0.4s cubic-bezier(0.22,1,0.36,1) both}
+@keyframes sIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HEADER ── */
+.sh{padding-top:18px;margin-bottom:13px;flex-shrink:0}
+.sh-label{font-family:var(--mono);font-size:0.52rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:7px;color:var(--gold)}
+.sh-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:-0.2px;margin-bottom:3px;color:var(--sand)}
+.sh-sub{font-size:0.76rem;color:var(--t2);line-height:1.55}
+
+/* ── DIVIDER ── */
+.ornament-divider{
+  display:flex;align-items:center;gap:10px;
+  flex-shrink:0;margin:8px 0;
+}
+.ornament-divider::before,.ornament-divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--b3),transparent);
+}
+.ornament-divider span{color:var(--gold);font-size:0.7rem;flex-shrink:0}
+
+/* ── BUTTONS ── */
+.btn{
+  width:100%;padding:14px 18px;border-radius:10px;border:none;
+  font-family:var(--arabic);font-size:0.9rem;font-weight:600;
+  cursor:pointer;transition:all 0.18s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn:active{transform:scale(0.97)}
+.btn-gold{
+  background:linear-gradient(135deg,#c8922a,#d4a843,#b8811e);
+  color:#1a1000;font-weight:700;
+  box-shadow:0 6px 20px rgba(212,168,67,0.25);
+  border:1px solid rgba(212,168,67,0.4);
+}
+.btn-gold:hover{box-shadow:0 8px 28px rgba(212,168,67,0.35)}
+.btn-ghost{
+  background:transparent;color:var(--t2);
+  border:1px solid var(--b2);
+}
+.btn-ghost:hover{border-color:var(--b3);color:var(--text)}
+.btn-red{background:linear-gradient(135deg,#a93226,#c0392b);color:#fff;font-weight:700;border:1px solid rgba(192,57,43,0.4);box-shadow:0 6px 18px rgba(192,57,43,0.2)}
+.btn-blue{background:linear-gradient(135deg,#1a6e8a,#2e86ab);color:#fff;font-weight:700;border:1px solid rgba(46,134,171,0.4);box-shadow:0 6px 18px rgba(46,134,171,0.2)}
+.btn-green{background:linear-gradient(135deg,#1e8a4a,#27ae60);color:#fff;font-weight:700;border:1px solid rgba(39,174,96,0.4);box-shadow:0 6px 18px rgba(39,174,96,0.2)}
+.btn-purple{background:linear-gradient(135deg,#6c3483,#8e44ad);color:#fff;font-weight:700;border:1px solid rgba(142,68,173,0.4);box-shadow:0 6px 18px rgba(142,68,173,0.2)}
+.btn-stack{display:flex;flex-direction:column;gap:8px;flex-shrink:0;margin-top:auto;padding-top:10px}
+
+/* ── CARD BASE ── */
+.hist-card{
+  background:var(--surface);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  position:relative;overflow:hidden;
+}
+.hist-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,168,67,0.03) 0%,transparent 60%);
+  pointer-events:none;
+}
+
+/* ══════════════════ HOME ══════════════════ */
+#s-home{justify-content:flex-start;align-items:stretch;padding-top:0}
+.home-hero{
+  flex-shrink:0;
+  background:linear-gradient(180deg,rgba(212,168,67,0.06) 0%,transparent 100%);
+  border-bottom:1px solid var(--b1);
+  padding:28px 18px 22px;
+  text-align:center;
+  position:relative;
+}
+.home-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.home-title-ar{font-family:var(--serif);font-size:2.6rem;font-weight:700;color:var(--gold);letter-spacing:2px;line-height:1;margin-bottom:4px}
+.home-title-en{font-family:var(--mono);font-size:0.55rem;letter-spacing:6px;color:var(--t3);text-transform:uppercase;margin-bottom:12px}
+.home-tagline{font-size:0.82rem;color:var(--t2);line-height:1.5}
+.games-section{padding:16px 18px 0;flex-shrink:0}
+.games-section-title{
+  font-family:var(--mono);font-size:0.52rem;letter-spacing:3px;color:var(--t3);
+  text-transform:uppercase;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.games-section-title::after{content:'';flex:1;height:1px;background:var(--b1)}
+.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.game-card{
+  background:var(--surface);border:1px solid var(--b1);
+  border-radius:14px;padding:16px 14px;cursor:pointer;
+  transition:all 0.22s cubic-bezier(0.22,1,0.36,1);
+  display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
+  min-height:120px;
+}
+.game-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transition:transform 0.25s;
+}
+.game-card:active{transform:scale(0.96)}
+.game-card.active-card:active::after,.game-card:hover::after{transform:scaleX(1)}
+.gc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gc-name{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--sand);line-height:1.2}
+.gc-desc{font-size:0.65rem;color:var(--t2);line-height:1.4}
+/* Per-game colors */
+.gc-spy::after{background:var(--gold)} .gc-spy .gc-icon{background:var(--gold2);border:1px solid rgba(212,168,67,0.2)}
+.gc-sj::after{background:var(--purple)} .gc-sj .gc-icon{background:var(--purple2);border:1px solid rgba(142,68,173,0.2)}
+.gc-xo::after{background:var(--cyan)} .gc-xo .gc-icon{background:var(--cyan2);border:1px solid rgba(46,134,171,0.2)}
+.gc-ch::after{background:var(--red)} .gc-ch .gc-icon{background:var(--red2);border:1px solid rgba(192,57,43,0.2)}
+.gc-tab::after{background:var(--green)} .gc-tab .gc-icon{background:var(--green2);border:1px solid rgba(39,174,96,0.2)}
+.home-footer-btn{padding:0 18px 16px;flex-shrink:0}
+
+/* ══════════════════ INPUTS ══════════════════ */
+.input-row{display:flex;gap:7px;margin-bottom:9px;flex-shrink:0}
+.inp{
+  flex:1;background:var(--s2);border:1px solid var(--b1);
+  border-radius:10px;padding:12px 13px;
+  color:var(--text);font-family:var(--arabic);font-size:0.88rem;outline:none;
+  transition:border-color 0.2s;
+}
+.inp::placeholder{color:var(--t3)}
+.inp:focus{border-color:var(--b3);box-shadow:0 0 0 3px rgba(212,168,67,0.05)}
+.btn-add{
+  width:44px;height:44px;
+  background:linear-gradient(135deg,#c8922a,#d4a843);
+  border:none;border-radius:10px;color:#1a1000;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.18s;flex-shrink:0;
+}
+.btn-add:active{transform:scale(0.9)}
+.cnt-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:0.56rem;color:var(--t3);letter-spacing:1px;margin-bottom:8px;flex-shrink:0}
+.cnt-num{background:var(--gold2);color:var(--gold);border:1px solid rgba(212,168,67,0.2);border-radius:5px;padding:1px 7px;font-weight:700}
+.p-list{list-style:none;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:6px;scrollbar-width:none;margin-bottom:9px}
+.p-list::-webkit-scrollbar{display:none}
+.p-item{
+  background:var(--s2);border:1px solid var(--b1);border-radius:10px;
+  padding:10px 13px;display:flex;align-items:center;
+  animation:iIn 0.25s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes iIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+.p-num{font-family:var(--mono);font-size:0.54rem;color:var(--t3);margin-left:8px;flex-shrink:0}
+.p-name-txt{font-size:0.86rem;font-weight:500;flex:1;color:var(--text)}
+.p-pts-badge{font-family:var(--mono);font-size:0.62rem;color:var(--gold);background:var(--gold2);border:1px solid rgba(212,168,67,0.15);padding:2px 7px;border-radius:5px;margin-left:6px}
+.btn-rm{background:none;border:1px solid var(--b1);border-radius:7px;padding:3px 8px;color:var(--t3);font-family:var(--arabic);font-size:0.64rem;cursor:pointer;transition:all 0.18s}
+.btn-rm:hover{border-color:rgba(192,57,43,0.3);color:var(--red)}
+.p-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--t3)}
+.p-empty p{font-size:0.76rem;text-align:center;line-height:1.5}
+
+/* ══════════════════ FLIP CARD ══════════════════ */
+.rev-meta{padding-top:18px;flex-shrink:0;margin-bottom:12px}
+.rev-label{font-family:var(--mono);font-size:0.5rem;letter-spacing:3px;color:var(--t3);text-transform:uppercase;margin-bottom:8px}
+.rev-player{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--gold);letter-spacing:0.5px}
+.rev-prog,.vote-prog{display:flex;gap:4px;margin-top:9px}
+.pip,.vpip{flex:1;height:2px;background:var(--b1);border-radius:100px;transition:background 0.4s}
+.pip.done{background:var(--gold)}.pip.active{background:rgba(212,168,67,0.4)}
+.vpip.done{background:var(--gold)}.vpip.active{background:rgba(212,168,67,0.3)}
+.flip-wrap{flex:1;perspective:1200px;margin-bottom:11px;min-height:180px}
+.flip-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.65s cubic-bezier(0.16,1,0.3,1);cursor:pointer}
+.flip-card.flipped{transform:rotateY(180deg)}
+.flip-f,.flip-b{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 22px;text-align:center}
+.flip-f{
+  background:var(--surface);
+  border:1px dashed var(--b2);
+}
+.flip-f-inner{display:flex;flex-direction:column;align-items:center;gap:14px}
+.flip-f-seal{
+  width:52px;height:52px;border-radius:50%;
+  border:2px solid var(--b2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.flip-f-seal::before{
+  content:'';position:absolute;width:110%;height:110%;border-radius:50%;
+  border:1px solid rgba(212,168,67,0.1);animation:ripple 2s ease-out infinite;
+}
+@keyframes ripple{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.9);opacity:0}}
+.ff-txt{font-size:0.84rem;color:var(--t2);line-height:1.5}
+.ff-hint{font-family:var(--mono);font-size:0.54rem;letter-spacing:2px;text-transform:uppercase;margin-top:4px;color:rgba(212,168,67,0.35)}
+.flip-b{
+  background:linear-gradient(145deg,#110e08,#0d0b06);
+  border:1px solid var(--b2);
+  transform:rotateY(180deg);
+}
+.flip-b.spy{
+  background:linear-gradient(145deg,#180a08,#100504);
+  border-color:rgba(192,57,43,0.25);
+}
+.c-badge{font-family:var(--mono);font-size:0.5rem;letter-spacing:3px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:16px}
+.c-badge.n{background:rgba(212,168,67,0.1);color:var(--gold);border:1px solid rgba(212,168,67,0.25)}
+.c-badge.s{background:rgba(192,57,43,0.1);color:var(--red);border:1px solid rgba(192,57,43,0.25)}
+.c-main{font-family:var(--serif);font-size:1.8rem;font-weight:700;line-height:1.2}
+.c-main.n{color:var(--gold);text-shadow:0 0 20px rgba(212,168,67,0.2)}
+.c-main.s{color:var(--red);text-shadow:0 0 20px rgba(192,57,43,0.2)}
+.c-sub{font-size:0.72rem;color:var(--t3);margin-top:8px;line-height:1.4}
+.vflip-b{
+  position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;
+  padding:14px;background:linear-gradient(145deg,#14100a,#0e0b06);
+  border:1px solid var(--b2);transform:rotateY(180deg);
+  display:flex;flex-direction:column;gap:6px;overflow-y:auto;scrollbar-width:none;
+}
+.v-option{
+  width:100%;background:rgba(212,168,67,0.04);border:1px solid var(--b1);
+  border-radius:10px;padding:11px 14px;display:flex;align-items:center;gap:8px;
+  cursor:pointer;transition:all 0.18s;font-family:var(--arabic);font-size:0.86rem;font-weight:600;color:var(--text);text-align:right;
+}
+.v-option.picked{border-color:var(--b3);background:var(--gold2);color:var(--gold)}
+.v-av{width:24px;height:24px;border-radius:50%;background:var(--s2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;color:var(--t2);flex-shrink:0}
+
+/* ══════════════════ CATS GRID ══════════════════ */
+.cats-grid,.sj-cats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;overflow-y:auto;flex:1;scrollbar-width:none;padding-bottom:2px}
+.cats-grid::-webkit-scrollbar,.sj-cats-grid::-webkit-scrollbar{display:none}
+.cat-card,.sj-cat-card{
+  background:var(--surface);border:1px solid var(--b1);border-radius:12px;
+  padding:14px 12px;cursor:pointer;transition:all 0.2s;
+  display:flex;flex-direction:column;min-height:86px;position:relative;overflow:hidden;
+}
+.cat-card::after,.sj-cat-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transition:transform 0.2s;
+}
+.cat-card.selected,.cat-card:active,.sj-cat-card.selected,.sj-cat-card:active{transform:scale(0.97);border-color:var(--b3);background:var(--gold3)}
+.cat-card.selected::after,.sj-cat-card.selected::after{transform:scaleX(1)}
+.sj-cat-card.cp::after{background:var(--purple)}
+.sj-cat-card.cp.selected{border-color:rgba(142,68,173,0.3);background:var(--purple2)}
+.cat-icon-wrap{width:28px;height:28px;background:var(--gold2);border:1px solid rgba(212,168,67,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:7px;flex-shrink:0}
+.cat-name{font-size:0.82rem;font-weight:600;margin-bottom:2px;color:var(--sand)}
+.cat-count{font-family:var(--mono);font-size:0.5rem;letter-spacing:1px;color:var(--t3)}
+
+/* ══════════════════ GAME CHIPS ══════════════════ */
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex-shrink:0;margin-bottom:8px}
+.ic{background:var(--surface);border:1px solid var(--b1);border-radius:11px;padding:12px 14px}
+.ic-label{font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:4px}
+.ic-val{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--gold)}
+.chips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;overflow-y:auto;flex:1;scrollbar-width:none}
+.chips-grid::-webkit-scrollbar{display:none}
+.chip{background:var(--surface);border:1px solid var(--b1);border-radius:10px;padding:9px 11px;display:flex;align-items:center;gap:6px}
+.chip-av{width:24px;height:24px;border-radius:50%;background:var(--s2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:0.66rem;font-weight:700;color:var(--t2);flex-shrink:0}
+.chip-name{font-size:0.78rem;font-weight:500;word-break:break-word;color:var(--text)}
+
+/* ══════════════════ VOTE RESULT ══════════════════ */
+.tally-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;background:var(--surface);border:1px solid var(--b1);border-radius:10px;padding:9px 13px}
+.tally-name{font-size:0.84rem;font-weight:600;min-width:60px;text-align:right;color:var(--sand)}
+.tally-bar-wrap{flex:1;height:3px;background:var(--b1);border-radius:100px;overflow:hidden;margin:0 6px}
+.tally-bar{height:100%;background:var(--gold);border-radius:100px;width:0%;transition:width 0.9s ease}
+.tally-votes{font-family:var(--mono);font-size:0.68rem;color:var(--gold);background:var(--gold2);padding:2px 8px;border-radius:5px;flex-shrink:0}
+.accused-reveal-wrap{text-align:center;margin:16px 0}
+.accused-label{font-family:var(--mono);font-size:0.5rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.accused-name-anim{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--sand);min-height:2.5rem}
+.accused-name-anim span{display:inline-block;opacity:0;transform:translateY(8px);transition:opacity 0.15s,transform 0.15s}
+.pts-chips-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.pts-chip{font-size:0.72rem;background:var(--gold2);border:1px solid rgba(212,168,67,0.2);color:var(--gold);padding:4px 11px;border-radius:100px;font-weight:600}
+
+/* ══════════════════ SPY GUESS ══════════════════ */
+.hidden-word-box{background:rgba(0,0,0,0.3);border:1px dashed rgba(192,57,43,0.3);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:4px}
+.hidden-word{font-family:var(--serif);font-size:1.6rem;font-weight:700;letter-spacing:3px;color:transparent;filter:blur(8px);transition:all 0.6s;display:inline-block}
+.hidden-word.revealed{color:var(--red);text-shadow:0 0 18px rgba(192,57,43,0.2);filter:blur(0)}
+.reveal-hint{font-family:var(--mono);font-size:0.54rem;letter-spacing:2px;color:rgba(192,57,43,0.4);text-transform:uppercase;margin-top:9px}
+
+/* ══════════════════ LB ══════════════════ */
+.lb-list{display:flex;flex-direction:column;gap:6px}
+.lb-row{background:var(--surface);border:1px solid var(--b1);border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:7px}
+.lb-row.gold{border-color:rgba(212,168,67,0.35);background:var(--gold3)}
+.lb-row.silver{border-color:rgba(180,180,180,0.2)}
+.lb-row.bronze{border-color:rgba(160,90,40,0.2)}
+.lb-rank{font-size:0.7rem;width:20px;text-align:center;flex-shrink:0}
+.lb-name{flex:1;font-size:0.86rem;font-weight:600;color:var(--sand)}
+.lb-delta{font-family:var(--mono);font-size:0.58rem;color:var(--gold);opacity:.75}
+.lb-pts{font-family:var(--mono);font-size:0.72rem;font-weight:700;color:var(--gold);background:var(--gold2);border:1px solid rgba(212,168,67,0.15);padding:2px 8px;border-radius:6px}
+
+/* ══════════════════ RES BOX ══════════════════ */
+.res-outcome{border-radius:12px;padding:16px;text-align:center;flex-shrink:0;margin-bottom:9px}
+.res-outcome.win{background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.2)}
+.res-outcome.lose{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2)}
+
+/* ══════════════════ SJ SETUP ══════════════════ */
+.sj-setup-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;flex-shrink:0}
+.sj-setup-box{background:var(--surface);border:1px solid var(--b1);border-radius:12px;padding:14px}
+.sj-setup-label{font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:8px}
+.team-name-inp{width:100%;background:transparent;border:none;border-bottom:1px solid var(--b2);color:var(--text);font-family:var(--arabic);font-size:0.9rem;font-weight:600;outline:none;padding:4px 0;margin-bottom:8px}
+.team-name-inp:focus{border-color:var(--b3)}
+.player-count-row{display:flex;align-items:center;gap:8px}
+.cnt-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--b2);background:transparent;color:var(--text);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s;flex-shrink:0}
+.cnt-btn:active{transform:scale(0.9);border-color:var(--b3)}
+.cnt-val{font-family:var(--mono);font-size:1rem;font-weight:700;min-width:20px;text-align:center;color:var(--gold)}
+.sj-sel-badge{font-family:var(--mono);font-size:0.58rem;color:var(--purple);background:var(--purple2);border:1px solid rgba(142,68,173,0.2);border-radius:5px;padding:2px 8px;display:inline-flex;align-items:center;flex-shrink:0;margin-bottom:8px}
+
+/* ══════════════════ SJ BOARD ══════════════════ */
+.sj-teams-bar{display:flex;gap:8px;flex-shrink:0;margin-bottom:8px}
+.sj-team-box{flex:1;background:var(--surface);border:1px solid var(--b1);border-radius:11px;padding:10px 12px;text-align:center;transition:border-color 0.3s}
+.sj-team-box.active-team{border-color:rgba(212,168,67,0.4);background:var(--gold3)}
+.sj-team-label{font-family:var(--mono);font-size:0.48rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sj-team-score{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--gold)}
+.sj-board-scroll{flex:1;overflow:auto;scrollbar-width:none}
+.sj-board-scroll::-webkit-scrollbar{display:none}
+.sj-board-grid{display:grid;gap:5px;min-width:max-content;padding-bottom:4px}
+.sj-col-header{background:var(--s3);border:1px solid var(--b2);border-radius:9px;padding:8px 6px;text-align:center;font-size:0.62rem;font-weight:700;color:var(--gold);display:flex;flex-direction:column;align-items:center;gap:4px}
+.sj-col-icon{width:20px;height:20px}
+.sj-q-cell{border-radius:8px;padding:10px 4px;text-align:center;cursor:pointer;transition:all 0.2s;border:1px solid var(--b1);font-family:var(--mono);font-weight:700;font-size:0.8rem;min-width:62px}
+.sj-q-cell.pts-200{background:rgba(39,174,96,0.08);color:var(--green);border-color:rgba(39,174,96,0.2)}
+.sj-q-cell.pts-400{background:rgba(212,168,67,0.07);color:var(--gold);border-color:rgba(212,168,67,0.2)}
+.sj-q-cell.pts-600{background:rgba(142,68,173,0.08);color:var(--purple);border-color:rgba(142,68,173,0.2)}
+.sj-q-cell.used{background:rgba(255,255,255,0.01);color:var(--t3);border-color:var(--b1);cursor:default;opacity:0.35}
+.sj-q-cell:not(.used):active{transform:scale(0.93)}
+.sj-final{border-radius:13px;padding:18px;text-align:center;margin-bottom:12px}
+.sj-final.win{background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.2)}
+.sj-final.draw{background:rgba(46,134,171,0.06);border:1px solid rgba(46,134,171,0.2)}
+.sj-final.lose{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2)}
+
+/* ══════════════════ MODAL ══════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--bg2);border:1px solid var(--b2);border-top:2px solid var(--gold);border-radius:20px 20px 0 0;padding:22px 18px;width:100%;max-width:440px;transform:translateY(40px);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+@media(orientation:landscape){.modal-overlay{align-items:center}.modal-box{border-radius:16px;max-width:480px;max-height:88vh;overflow-y:auto}}
+.modal-pts-badge{font-family:var(--mono);font-size:0.56rem;letter-spacing:3px;text-transform:uppercase;padding:4px 12px;border-radius:100px;display:inline-block;margin-bottom:12px}
+.modal-pts-badge.p200{background:rgba(39,174,96,0.1);color:var(--green);border:1px solid rgba(39,174,96,0.25)}
+.modal-pts-badge.p400{background:rgba(212,168,67,0.1);color:var(--gold);border:1px solid rgba(212,168,67,0.25)}
+.modal-pts-badge.p600{background:rgba(142,68,173,0.1);color:var(--purple);border:1px solid rgba(142,68,173,0.25)}
+.modal-q-text{font-size:1rem;font-weight:600;line-height:1.55;margin-bottom:16px;color:var(--text)}
+.modal-ans-box{background:rgba(0,0,0,0.25);border:1px dashed var(--b2);border-radius:12px;padding:14px;text-align:center;cursor:pointer;margin-bottom:14px;transition:all 0.2s}
+.modal-ans-text{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:transparent;filter:blur(8px);transition:all 0.5s}
+.modal-ans-text.show{color:var(--gold);filter:blur(0)}
+.modal-ans-hint{font-family:var(--mono);font-size:0.54rem;letter-spacing:2px;color:rgba(212,168,67,0.35);text-transform:uppercase;margin-top:6px}
+
+/* ══════════════════ XO ══════════════════ */
+.xo-cell{
+  aspect-ratio:1;border-radius:14px;
+  border:1px solid var(--b2);
+  background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative;overflow:hidden;
+}
+.xo-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,168,67,0.03),transparent);pointer-events:none}
+.xo-cell:hover:not(.taken){background:var(--s3);border-color:var(--b3);transform:scale(1.04)}
+.xo-cell:active:not(.taken){transform:scale(0.95)}
+.xo-cell.taken{cursor:default}
+.xo-cell.win-cell{border-color:rgba(212,168,67,0.5);background:var(--gold3);box-shadow:0 0 18px rgba(212,168,67,0.18)}
+.xo-cell svg{transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.xo-cell.just-placed svg{animation:popIn 0.35s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes popIn{0%{transform:scale(0) rotate(-15deg);opacity:0}60%{transform:scale(1.15) rotate(5deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+
+/* ══════════════════ CHALLENGE ══════════════════ */
+.ch-player-chip{
+  background:var(--surface);border:1px solid var(--b1);border-radius:10px;
+  padding:8px 12px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;
+  transition:border-color 0.3s;min-width:80px;
+}
+.ch-player-chip.active-turn{border-color:var(--b3);background:var(--gold3)}
+.ch-chip-name{font-size:0.72rem;font-weight:600;color:var(--sand);text-align:center;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-chip-lives{font-size:0.7rem;letter-spacing:1px}
+.ch-timer-ring{stroke-dasharray:377;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke 0.3s}
+
+/* ══════════════════ TABOO ══════════════════ */
+.tab-word-card{
+  width:100%;background:var(--surface);
+  border:1px solid var(--b2);
+  border-top:3px solid var(--gold);
+  border-radius:16px;padding:22px 18px;text-align:center;
+}
+.tab-forbidden-word{
+  background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);
+  border-radius:7px;padding:4px 10px;
+  font-size:0.78rem;font-weight:600;color:var(--red);
+}
+
+/* ══════════════════ FOOTER ══════════════════ */
+.footer{
+  flex-shrink:0;padding:7px 18px 11px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-top:1px solid var(--b1);
+}
+.footer-name{font-size:0.65rem;color:var(--t3);font-weight:600;font-family:var(--serif)}
+.footer-ig{display:flex;align-items:center;gap:4px;font-size:0.65rem;color:var(--t3);font-weight:700;text-decoration:none;transition:color 0.2s}
+.footer-ig:hover{color:var(--gold)}
+.footer-ig svg{width:10px;height:10px;fill:currentColor;flex-shrink:0}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--s3);border:1px solid var(--b2);border-top:1px solid var(--gold);border-radius:9px;padding:8px 16px;font-size:0.76rem;color:var(--text);white-space:nowrap;z-index:300;opacity:0;transition:opacity 0.3s;pointer-events:none}
+.toast.show{opacity:1}
+
+/* ══════════════════ GLOBAL LB ══════════════════ */
+#s-lb{overflow-y:auto;scrollbar-width:none}
+#s-lb::-webkit-scrollbar{display:none}
+#s-k-result{overflow-y:auto;scrollbar-width:none}
+#s-k-result::-webkit-scrollbar{display:none}
+
+@media(orientation:landscape){
+  .cats-grid,.sj-cats-grid{grid-template-columns:repeat(3,1fr)!important}
+  .sj-board-grid{grid-template-columns:repeat(7,1fr)!important}
+  .games-grid{grid-template-columns:repeat(3,1fr)!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="logo">
+      <svg class="logo-emblem" viewBox="0 0 28 28" fill="none">
+        <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#d4a843" stroke-width="1.2" opacity=".6"/>
+        <polygon points="14,6 22,10 22,18 14,22 6,18 6,10" fill="none" stroke="#d4a843" stroke-width="0.7" opacity=".35"/>
+        <circle cx="14" cy="14" r="3" fill="#d4a843" opacity=".7"/>
+        <line x1="14" y1="2" x2="14" y2="6" stroke="#d4a843" stroke-width="0.8" opacity=".4"/>
+        <line x1="14" y1="22" x2="14" y2="26" stroke="#d4a843" stroke-width="0.8" opacity=".4"/>
+        <line x1="2" y1="8" x2="6" y2="10" stroke="#d4a843" stroke-width="0.8" opacity=".4"/>
+        <line x1="22" y1="18" x2="26" y2="20" stroke="#d4a843" stroke-width="0.8" opacity=".4"/>
+        <line x1="26" y1="8" x2="22" y2="10" stroke="#d4a843" stroke-width="0.8" opacity=".4"/>
+        <line x1="6" y1="18" x2="2" y2="20" stroke="#d4a843" stroke-width="0.8" opacity=".4"/>
+      </svg>
+      <div class="logo-text-wrap">
+        <div class="logo-ar">كشتة</div>
+        <div class="logo-en">KASHTA GAMES</div>
+      </div>
+    </div>
+    <div class="step-txt" id="step-txt"></div>
+  </div>
+
+  <div class="screens-wrap">
+
+    <!-- ══════════ HOME ══════════ -->
+    <section class="screen active" id="s-home">
+      <div class="home-hero">
+        <svg viewBox="0 0 200 40" width="160" style="margin:0 auto 10px;display:block;opacity:.35">
+          <line x1="0" y1="20" x2="60" y2="20" stroke="#d4a843" stroke-width="0.8"/>
+          <polygon points="80,4 100,20 80,36 60,20" fill="none" stroke="#d4a843" stroke-width="1"/>
+          <circle cx="100" cy="20" r="4" fill="#d4a843" opacity=".6"/>
+          <polygon points="120,4 140,20 120,36 140,20" fill="none" stroke="#d4a843" stroke-width="1"/>
+          <line x1="140" y1="20" x2="200" y2="20" stroke="#d4a843" stroke-width="0.8"/>
+        </svg>
+        <div class="home-title-ar">كشتة</div>
+        <div class="home-title-en">KASHTA · GAMES COLLECTION</div>
+        <div class="home-tagline">مجموعة ألعاب للسهرات والكشتات</div>
+      </div>
+      <div class="games-section">
+        <div class="games-section-title">اختر اللعبة</div>
+        <div class="games-grid">
+
+          <div class="game-card gc-spy" onclick="goTo('s-k-cats')">
+            <div class="gc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a843" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><circle cx="11" cy="11" r="4"/></svg>
+            </div>
+            <div>
+              <div class="gc-name">برا السالفة</div>
+              <div class="gc-desc">اكشف الجاسوس المختبئ بين الجماعة</div>
+            </div>
+          </div>
+
+          <div class="game-card gc-sj" onclick="goTo('s-sj-setup')">
+            <div class="gc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8e44ad" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="gc-name">سين جيم</div>
+              <div class="gc-desc">أسئلة ومعلومات بين فريقين</div>
+            </div>
+          </div>
+
+          <div class="game-card gc-xo" onclick="goTo('s-xo-setup')">
+            <div class="gc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e86ab" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div>
+              <div class="gc-name">اكس او</div>
+              <div class="gc-desc">لعبة الإكس والدائرة الكلاسيكية</div>
+            </div>
+          </div>
+
+          <div class="game-card gc-ch" onclick="goTo('s-ch-setup')">
+            <div class="gc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="gc-name">تحدي الحروف</div>
+              <div class="gc-desc">كلمات متسلسلة لعدة لاعبين</div>
+            </div>
+          </div>
+
+          <div class="game-card gc-tab" onclick="goTo('s-tab-setup')">
+            <div class="gc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+            </div>
+            <div>
+              <div class="gc-name">تابو</div>
+              <div class="gc-desc">صف الكلمة بدون ما تقولها!</div>
+            </div>
+          </div>
+
+          <div class="game-card" style="background:var(--s2);border-style:dashed;cursor:default;opacity:0.4;justify-content:center;align-items:center;text-align:center">
+            <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase">قريباً</div>
+            <div style="font-size:0.7rem;color:var(--t3);margin-top:4px">لعبة جديدة</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="home-footer-btn">
+        <button class="btn btn-ghost" onclick="openLb()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 21H16M12 3v4M12 7c-3.3 0-6 2.2-6 5.5S8.7 18 12 18s6-2.2 6-5.5S15.3 7 12 7z"/></svg>
+          الترتيب المحفوظ
+        </button>
+      </div>
+    </section>
+
+    <!-- ══════════ KHAREJ CATS ══════════ -->
+    <section class="screen" id="s-k-cats">
+      <div class="sh"><div class="sh-label">برا السالفة · ١/٣</div><h2 class="sh-title">اختر الفئة</h2><p class="sh-sub">موضوع الكلمة السرية لهذه الجلسة</p></div>
+      <div class="cats-grid" id="k-cats-grid"></div>
+      <div class="btn-stack"><button class="btn btn-ghost" onclick="goTo('s-home')">← رجوع</button></div>
+    </section>
+
+    <!-- ══════════ KHAREJ PLAYERS ══════════ -->
+    <section class="screen" id="s-k-players">
+      <div class="sh"><div class="sh-label">برا السالفة · ٢/٣</div><h2 class="sh-title">أضف اللاعبين</h2><p class="sh-sub">ثلاثة على الأقل — اثنا عشر كحد أقصى</p></div>
+      <div class="input-row">
+        <input class="inp" id="k-p-inp" placeholder="اسم اللاعب..." maxlength="18">
+        <button class="btn-add" onclick="kAdd()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      </div>
+      <div class="cnt-badge">اللاعبون <span class="cnt-num" id="k-cnt">0</span></div>
+      <ul class="p-list" id="k-p-list">
+        <li class="p-empty" id="k-p-empty"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".25"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>أضف لاعبين للبدء</p></li>
+      </ul>
+      <div class="btn-stack">
+        <button class="btn btn-gold" id="k-btn-start" onclick="kStartReveal()" style="display:none">توزيع الأدوار ←</button>
+        <button class="btn btn-ghost" onclick="goTo('s-k-cats')">← رجوع</button>
+      </div>
+    </section>
+
+    <!-- ══════════ KHAREJ REVEAL ══════════ -->
+    <section class="screen" id="s-k-reveal">
+      <div class="rev-meta"><div class="rev-label">اكشف دورك سراً</div><div class="rev-player" id="k-rev-name">—</div><div class="rev-prog" id="k-rev-prog"></div></div>
+      <div class="flip-wrap">
+        <div class="flip-card" id="k-flip" onclick="kFlip()">
+          <div class="flip-f">
+            <div class="flip-f-inner">
+              <div class="flip-f-seal">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a843" stroke-width="1.2" opacity=".5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div class="ff-txt">اضغط للاطلاع على دورك سراً</div>
+              <div class="ff-hint">سري · للعيون فقط</div>
+            </div>
+          </div>
+          <div class="flip-b" id="k-flip-back"></div>
+        </div>
+      </div>
+      <div class="btn-stack"><button class="btn btn-gold" id="k-btn-next-rev" onclick="kNextReveal()" style="display:none">قرأت وفهمت ←</button></div>
+    </section>
+
+    <!-- ══════════ KHAREJ GAME ══════════ -->
+    <section class="screen" id="s-k-game">
+      <div class="sh" style="margin-bottom:8px"><div class="sh-label">مرحلة التحقيق</div><h2 class="sh-title">ابدأوا الأسئلة</h2></div>
+      <div class="info-row">
+        <div class="ic"><div class="ic-label">الفئة</div><div class="ic-val" id="k-g-cat">—</div></div>
+        <div class="ic"><div class="ic-label">اللاعبون</div><div class="ic-val" id="k-g-cnt">—</div></div>
+      </div>
+      <div style="font-size:0.74rem;color:var(--t3);text-align:center;flex-shrink:0;margin-bottom:8px">تبادلوا الأسئلة ثم صوّتوا بشكل سري على الجاسوس</div>
+      <div class="chips-grid" id="k-chips"></div>
+      <div class="btn-stack" style="margin-top:8px">
+        <button class="btn btn-gold" onclick="kStartVoting()">انتهت الأسئلة — صوّتوا الآن</button>
+      </div>
+    </section>
+
+    <!-- ══════════ KHAREJ VOTE ══════════ -->
+    <section class="screen" id="s-k-vote">
+      <div class="rev-meta"><div class="rev-label">تصويت سري</div><div class="rev-player" id="k-vote-name">—</div><div class="vote-prog" id="k-vote-prog"></div></div>
+      <div class="flip-wrap">
+        <div class="flip-card" id="k-vflip">
+          <div class="flip-f" onclick="kOpenVote()">
+            <div class="flip-f-inner">
+              <div class="flip-f-seal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a843" stroke-width="1.2" opacity=".5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              </div>
+              <div class="ff-txt">اضغط لاختيار الجاسوس سراً</div>
+              <div class="ff-hint">لا يراك أحد</div>
+            </div>
+          </div>
+          <div class="vflip-b" id="k-vflip-back"></div>
+        </div>
+      </div>
+      <div class="btn-stack"><button class="btn btn-gold" id="k-btn-next-vote" onclick="kNextVote()" style="display:none">صوّتُ — التالي ←</button></div>
+    </section>
+
+    <!-- ══════════ KHAREJ VOTE RESULT ══════════ -->
+    <section class="screen" id="s-k-vres">
+      <div class="sh"><div class="sh-label">نتيجة التصويت</div><h2 class="sh-title">الأغلبية صوّتت على...</h2></div>
+      <div id="k-tally-wrap" style="margin-bottom:10px;flex-shrink:0"></div>
+      <div class="accused-reveal-wrap"><div class="accused-label">المتهم بالأغلبية</div><div class="accused-name-anim" id="k-accused-anim"></div></div>
+      <div class="pts-chips-row" id="k-pts-chips"></div>
+      <div class="btn-stack"><button class="btn btn-gold" id="k-btn-after-vres" onclick="kAfterVoteResult()" style="display:none">التالي ←</button></div>
+    </section>
+
+    <!-- ══════════ KHAREJ SPY GUESS ══════════ -->
+    <section class="screen" id="s-k-guess">
+      <div class="sh"><div class="sh-label">فرصة الجاسوس</div><h2 class="sh-title">خمّن الكلمة</h2></div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:13px">
+        <div style="background:var(--surface);border:1px solid rgba(192,57,43,0.2);border-top:2px solid var(--red);border-radius:14px;padding:20px;text-align:center">
+          <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px">الجاسوس</div>
+          <div style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--red);margin-bottom:8px" id="k-guess-spy-name">—</div>
+          <div style="font-size:0.76rem;color:var(--t2);line-height:1.5;margin-bottom:16px">اضغط لكشف الكلمة — إذا عرفتها تحصل على <strong style="color:var(--gold)">+٢ نقطة</strong></div>
+          <div class="hidden-word-box" onclick="kRevealWord()">
+            <div class="hidden-word" id="k-hidden-word">؟ ؟ ؟</div>
+            <div class="reveal-hint" id="k-reveal-hint">اضغط لكشف الكلمة</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem;color:var(--t2);text-align:center;margin-bottom:9px">هل عرفت الكلمة؟</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button class="btn btn-gold" onclick="kSpyGuess(true)">عرفتها</button>
+            <button class="btn btn-ghost" onclick="kSpyGuess(false)">ما عرفت</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ KHAREJ RESULT ══════════ -->
+    <section class="screen" id="s-k-result">
+      <div class="sh" style="padding-top:16px"><div class="sh-label">نتيجة الجولة</div><h2 class="sh-title">النتائج</h2></div>
+      <div id="k-res-box" class="res-outcome win" style="flex-shrink:0"></div>
+      <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:3px;color:var(--t3);text-transform:uppercase;margin-bottom:8px;flex-shrink:0">الترتيب</div>
+      <div class="lb-list" id="k-res-lb" style="overflow-y:auto;flex:1;margin-bottom:9px"></div>
+      <div class="btn-stack">
+        <button class="btn btn-gold" onclick="kSameGame()">جولة جديدة — نفس اللاعبين</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← الرئيسية</button>
+      </div>
+    </section>
+
+    <!-- ══════════ SJ SETUP ══════════ -->
+    <section class="screen" id="s-sj-setup">
+      <div class="sh"><div class="sh-label">سين جيم · الإعداد</div><h2 class="sh-title">إعداد الفريقين</h2></div>
+      <div class="sj-setup-row">
+        <div class="sj-setup-box"><div class="sj-setup-label">الفريق الأول</div><input class="team-name-inp" id="sj-t1-name" placeholder="اسم الفريق..." maxlength="16" value="الفريق الأول"><div style="font-family:var(--mono);font-size:0.48rem;letter-spacing:1px;color:var(--t3);margin-bottom:5px">عدد الأعضاء</div><div class="player-count-row"><button class="cnt-btn" onclick="sjCnt('t1',-1)">−</button><span class="cnt-val" id="sj-t1-cnt">2</span><button class="cnt-btn" onclick="sjCnt('t1',1)">+</button></div></div>
+        <div class="sj-setup-box"><div class="sj-setup-label">الفريق الثاني</div><input class="team-name-inp" id="sj-t2-name" placeholder="اسم الفريق..." maxlength="16" value="الفريق الثاني"><div style="font-family:var(--mono);font-size:0.48rem;letter-spacing:1px;color:var(--t3);margin-bottom:5px">عدد الأعضاء</div><div class="player-count-row"><button class="cnt-btn" onclick="sjCnt('t2',-1)">−</button><span class="cnt-val" id="sj-t2-cnt">2</span><button class="cnt-btn" onclick="sjCnt('t2',1)">+</button></div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-shrink:0;margin-bottom:8px">
+        <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase">اختر الفئات (حد أقصى ٧)</div>
+        <div class="sj-sel-badge"><span id="sj-sel-num">0</span>/٧ فئات</div>
+      </div>
+      <div class="sj-cats-grid" id="sj-cats-grid"></div>
+      <div class="btn-stack" style="margin-top:9px">
+        <button class="btn btn-purple" onclick="sjStart()">ابدأ اللعبة ←</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← رجوع</button>
+      </div>
+    </section>
+
+    <!-- ══════════ SJ BOARD ══════════ -->
+    <section class="screen" id="s-sj-board">
+      <div style="padding-top:12px;flex-shrink:0;margin-bottom:8px">
+        <div style="font-family:var(--mono);font-size:0.48rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:7px">دور: <span id="sj-turn-lbl" style="color:var(--gold)">—</span></div>
+        <div class="sj-teams-bar">
+          <div class="sj-team-box" id="sj-t1-box"><div class="sj-team-label" id="sj-t1-lbl">الفريق الأول</div><div class="sj-team-score" id="sj-t1-sc">0</div></div>
+          <div class="sj-team-box" id="sj-t2-box"><div class="sj-team-label" id="sj-t2-lbl">الفريق الثاني</div><div class="sj-team-score" id="sj-t2-sc">0</div></div>
+        </div>
+      </div>
+      <div class="sj-board-scroll"><div class="sj-board-grid" id="sj-board-grid"></div></div>
+      <div class="btn-stack" style="margin-top:8px"><button class="btn btn-red" onclick="sjEnd()">إنهاء وعرض النتيجة</button></div>
+    </section>
+
+    <!-- ══════════ SJ RESULT ══════════ -->
+    <section class="screen" id="s-sj-result">
+      <div class="sh" style="padding-top:16px"><div class="sh-label">نتيجة سين جيم</div><h2 class="sh-title">النتائج</h2></div>
+      <div id="sj-final-box" class="sj-final win" style="flex-shrink:0"></div>
+      <div class="lb-list" id="sj-res-lb" style="flex-shrink:0"></div>
+      <div class="btn-stack">
+        <button class="btn btn-purple" onclick="sjAgain()">جولة جديدة</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← الرئيسية</button>
+      </div>
+    </section>
+
+    <!-- ══════════ XO SETUP ══════════ -->
+    <section class="screen" id="s-xo-setup">
+      <div class="sh"><div class="sh-label">اكس او · الإعداد</div><h2 class="sh-title">إعداد اللعبة</h2></div>
+      <div class="sj-setup-row">
+        <div class="sj-setup-box"><div class="sj-setup-label">اللاعب الأول ✕</div><input class="team-name-inp" id="xo-p1-name" placeholder="الاسم..." maxlength="14" value="لاعب ١"></div>
+        <div class="sj-setup-box"><div class="sj-setup-label">اللاعب الثاني ○</div><input class="team-name-inp" id="xo-p2-name" placeholder="الاسم..." maxlength="14" value="لاعب ٢"></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--b1);border-radius:12px;padding:16px;margin-bottom:12px;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:10px">جولات الفوز بالمباراة</div>
+        <div style="display:flex;align-items:center;gap:14px;justify-content:center">
+          <button class="cnt-btn" onclick="xoChR(-1)">−</button>
+          <span style="font-family:var(--mono);font-size:1.6rem;font-weight:700;color:var(--cyan)" id="xo-rounds-val">3</span>
+          <button class="cnt-btn" onclick="xoChR(1)">+</button>
+        </div>
+        <div style="text-align:center;font-size:0.7rem;color:var(--t3);margin-top:6px">اللي يفوز بهذا العدد من الجولات يفوز بالمباراة</div>
+      </div>
+      <div style="flex:1"></div>
+      <div class="btn-stack">
+        <button class="btn btn-blue" onclick="xoStart()">ابدأ اللعبة ←</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← رجوع</button>
+      </div>
+    </section>
+
+    <!-- ══════════ XO GAME ══════════ -->
+    <section class="screen" id="s-xo-game">
+      <div style="padding-top:14px;flex-shrink:0">
+        <div style="display:flex;gap:8px;margin-bottom:10px">
+          <div class="sj-team-box" id="xo-p1-box">
+            <div class="sj-team-label" id="xo-p1-lbl">لاعب ١</div>
+            <div style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--cyan)" id="xo-p1-wins">0</div>
+            <div style="font-family:var(--mono);font-size:0.55rem;color:var(--t3)">✕</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex-shrink:0">
+            <div style="font-family:var(--mono);font-size:0.48rem;color:var(--t3)">دور</div>
+            <div style="font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--gold)" id="xo-turn-sym">✕</div>
+            <div style="font-family:var(--mono);font-size:0.48rem;color:var(--t3)" id="xo-round-lbl">جولة ١</div>
+          </div>
+          <div class="sj-team-box" id="xo-p2-box">
+            <div class="sj-team-label" id="xo-p2-lbl">لاعب ٢</div>
+            <div style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--red)" id="xo-p2-wins">0</div>
+            <div style="font-family:var(--mono);font-size:0.55rem;color:var(--t3)">○</div>
+          </div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--t2);text-align:center;margin-bottom:10px" id="xo-status">—</div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center">
+        <div style="position:relative;width:min(290px,84vw)">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%" id="xo-board"></div>
+          <canvas id="xo-line-canvas" style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%"></canvas>
+        </div>
+      </div>
+      <div class="btn-stack" style="margin-top:10px">
+        <button class="btn btn-blue" id="xo-next-btn" onclick="xoNextRound()" style="display:none">جولة جديدة ←</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← الرئيسية</button>
+      </div>
+    </section>
+
+    <!-- ══════════ XO RESULT ══════════ -->
+    <section class="screen" id="s-xo-result">
+      <div class="sh" style="padding-top:22px"><div class="sh-label">نتيجة المباراة</div><h2 class="sh-title">اكس او · النتيجة</h2></div>
+      <div id="xo-final-box" style="border-radius:14px;padding:24px;text-align:center;margin-bottom:16px;flex-shrink:0;background:var(--gold3);border:1px solid rgba(212,168,67,0.2)"></div>
+      <div style="flex:1"></div>
+      <div class="btn-stack">
+        <button class="btn btn-blue" onclick="xoRematch()">مباراة جديدة — نفس اللاعبين</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← الرئيسية</button>
+      </div>
+    </section>
+
+    <!-- ══════════ CHALLENGE SETUP ══════════ -->
+    <section class="screen" id="s-ch-setup">
+      <div class="sh"><div class="sh-label">تحدي الحروف · الإعداد</div><h2 class="sh-title">أضف اللاعبين</h2><p class="sh-sub">كل لاعب يكمل بكلمة تبدأ بآخر حرف — الكلمة المكررة تخسّر قلباً!</p></div>
+      <div class="input-row">
+        <input class="inp" id="ch-p-inp" placeholder="اسم اللاعب..." maxlength="14">
+        <button class="btn-add" onclick="chAddPlayer()" style="background:linear-gradient(135deg,#a93226,#c0392b)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      </div>
+      <div class="cnt-badge">اللاعبون <span class="cnt-num" id="ch-cnt">0</span></div>
+      <ul class="p-list" id="ch-p-list" style="max-height:150px">
+        <li class="p-empty" id="ch-p-empty"><p>أضف لاعبين (٢ على الأقل)</p></li>
+      </ul>
+      <div style="background:var(--surface);border:1px solid var(--b1);border-radius:12px;padding:14px;margin-bottom:10px;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:8px">الوقت لكل دور (ثانية)</div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:center">
+          <button class="cnt-btn" onclick="chChTime(-5)">−</button>
+          <span style="font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--red)" id="ch-time-val">20</span>
+          <button class="cnt-btn" onclick="chChTime(5)">+</button>
+        </div>
+      </div>
+      <div class="btn-stack">
+        <button class="btn btn-red" id="ch-start-btn" onclick="chStart()" style="display:none">ابدأ اللعبة ←</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← رجوع</button>
+      </div>
+    </section>
+
+    <!-- ══════════ CHALLENGE GAME ══════════ -->
+    <section class="screen" id="s-ch-game">
+      <div style="padding-top:14px;flex-shrink:0">
+        <div style="display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;scrollbar-width:none;padding-bottom:2px" id="ch-players-bar"></div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px">
+        <div style="position:relative;width:130px;height:130px;flex-shrink:0">
+          <svg style="position:absolute;inset:0;transform:rotate(-90deg)" width="130" height="130">
+            <circle cx="65" cy="65" r="56" fill="none" stroke="var(--b1)" stroke-width="7"/>
+            <circle cx="65" cy="65" r="56" fill="none" stroke="var(--red)" stroke-width="7" stroke-dasharray="352" stroke-dashoffset="0" id="ch-timer-ring" class="ch-timer-ring"/>
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <div style="font-family:var(--mono);font-size:1.9rem;font-weight:700;color:var(--text)" id="ch-timer-num">20</div>
+            <div style="font-family:var(--mono);font-size:0.46rem;color:var(--t3);letter-spacing:2px">ثانية</div>
+          </div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--b1);border-radius:14px;padding:16px 18px;text-align:center;width:100%">
+          <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:5px">دور</div>
+          <div style="font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:10px" id="ch-turn-name">—</div>
+          <div id="ch-last-word-row" style="display:none;font-size:0.8rem;color:var(--t2);margin-bottom:4px">
+            الكلمة السابقة: <span style="color:var(--sand);font-weight:600" id="ch-last-word">—</span>
+          </div>
+          <div style="font-size:0.76rem;color:var(--gold)" id="ch-must-start">ابدأ بأي كلمة</div>
+        </div>
+        <div style="display:flex;gap:8px;width:100%">
+          <input class="inp" id="ch-word-inp" placeholder="اكتب الكلمة..." maxlength="30" style="flex:1">
+          <button class="btn-add" onclick="chSubmitWord()" style="background:linear-gradient(135deg,#a93226,#c0392b)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></button>
+        </div>
+      </div>
+      <div class="btn-stack" style="margin-top:8px">
+        <button class="btn btn-red" onclick="chFail()">انتهى الوقت / فشل</button>
+      </div>
+    </section>
+
+    <!-- ══════════ CHALLENGE RESULT ══════════ -->
+    <section class="screen" id="s-ch-result">
+      <div class="sh" style="padding-top:20px"><div class="sh-label">نتيجة تحدي الحروف</div><h2 class="sh-title">النتيجة</h2></div>
+      <div id="ch-final-box" style="border-radius:14px;padding:22px;text-align:center;margin-bottom:14px;flex-shrink:0;background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2)"></div>
+      <div style="flex:1"></div>
+      <div class="btn-stack">
+        <button class="btn btn-red" onclick="chRematch()">جولة جديدة — نفس اللاعبين</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← الرئيسية</button>
+      </div>
+    </section>
+
+    <!-- ══════════ TABOO SETUP ══════════ -->
+    <section class="screen" id="s-tab-setup">
+      <div class="sh"><div class="sh-label">تابو · الإعداد</div><h2 class="sh-title">إعداد تابو</h2><p class="sh-sub">فريقان — صف الكلمة بدون ما تقول الكلمات الممنوعة!</p></div>
+      <div class="sj-setup-row">
+        <div class="sj-setup-box"><div class="sj-setup-label">الفريق الأول</div><input class="team-name-inp" id="tab-t1" placeholder="اسم الفريق..." maxlength="14" value="الفريق الأول"></div>
+        <div class="sj-setup-box"><div class="sj-setup-label">الفريق الثاني</div><input class="team-name-inp" id="tab-t2" placeholder="اسم الفريق..." maxlength="14" value="الفريق الثاني"></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--b1);border-radius:12px;padding:14px;margin-bottom:10px;flex-shrink:0">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div><div style="font-family:var(--mono);font-size:0.48rem;letter-spacing:2px;color:var(--t3);margin-bottom:6px">وقت الجولة (ث)</div><div class="player-count-row"><button class="cnt-btn" onclick="tabChTime(-10)">−</button><span class="cnt-val" id="tab-time-val">60</span><button class="cnt-btn" onclick="tabChTime(10)">+</button></div></div>
+          <div><div style="font-family:var(--mono);font-size:0.48rem;letter-spacing:2px;color:var(--t3);margin-bottom:6px">عدد الجولات</div><div class="player-count-row"><button class="cnt-btn" onclick="tabChRounds(-1)">−</button><span class="cnt-val" id="tab-rounds-val">3</span><button class="cnt-btn" onclick="tabChRounds(1)">+</button></div></div>
+        </div>
+      </div>
+      <div style="flex:1"></div>
+      <div class="btn-stack">
+        <button class="btn btn-green" onclick="tabStart()">ابدأ اللعبة ←</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← رجوع</button>
+      </div>
+    </section>
+
+    <!-- ══════════ TABOO GAME ══════════ -->
+    <section class="screen" id="s-tab-game">
+      <div style="padding-top:12px;flex-shrink:0">
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <div class="sj-team-box" id="tab-t1-box"><div class="sj-team-label" id="tab-t1-lbl">الفريق الأول</div><div class="sj-team-score" id="tab-t1-score" style="color:var(--green)">0</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;flex-shrink:0">
+            <div style="font-family:var(--mono);font-size:0.48rem;color:var(--t3)">جولة</div>
+            <div style="font-family:var(--mono);font-size:0.9rem;font-weight:700;color:var(--green)" id="tab-round-num">1</div>
+          </div>
+          <div class="sj-team-box" id="tab-t2-box"><div class="sj-team-label" id="tab-t2-lbl">الفريق الثاني</div><div class="sj-team-score" id="tab-t2-score" style="color:var(--purple)">0</div></div>
+        </div>
+        <div style="height:5px;background:var(--b1);border-radius:100px;overflow:hidden;margin-bottom:7px"><div id="tab-timer-bar" style="height:100%;background:var(--green);border-radius:100px;width:100%;transition:width 1s linear,background 0.3s"></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-family:var(--mono);font-size:0.54rem;color:var(--t3)">يصف: <span id="tab-describer" style="color:var(--green)">—</span></div>
+          <div style="font-family:var(--mono);font-size:0.82rem;font-weight:700;color:var(--green)" id="tab-timer-num">60</div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center">
+        <div class="tab-word-card">
+          <div style="font-family:var(--mono);font-size:0.48rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:10px">الكلمة</div>
+          <div style="font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--gold);margin-bottom:18px" id="tab-word">—</div>
+          <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px">ممنوع قولها</div>
+          <div id="tab-forbidden" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex-shrink:0;margin-top:10px">
+        <button class="btn btn-green" onclick="tabCorrect()">صح</button>
+        <button class="btn btn-ghost" onclick="tabPass()">تخطي</button>
+      </div>
+      <div style="margin-top:8px;flex-shrink:0"><button class="btn btn-ghost" onclick="tabEndRound()">إنهاء الدور مبكراً</button></div>
+    </section>
+
+    <!-- ══════════ TABOO RESULT ══════════ -->
+    <section class="screen" id="s-tab-result">
+      <div class="sh" style="padding-top:18px"><div class="sh-label">نتيجة تابو</div><h2 class="sh-title">النتائج</h2></div>
+      <div id="tab-final-box" style="border-radius:14px;padding:22px;text-align:center;margin-bottom:14px;flex-shrink:0"></div>
+      <div class="lb-list" id="tab-res-lb" style="flex-shrink:0"></div>
+      <div style="flex:1"></div>
+      <div class="btn-stack">
+        <button class="btn btn-green" onclick="tabPlayAgain()">جولة جديدة</button>
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← الرئيسية</button>
+      </div>
+    </section>
+
+    <!-- ══════════ GLOBAL LB ══════════ -->
+    <section class="screen" id="s-lb">
+      <div class="sh"><div class="sh-label">السجل المحفوظ</div><h2 class="sh-title">الترتيب الكلي</h2></div>
+      <div class="lb-list" id="global-lb" style="overflow-y:auto;flex:1;margin-bottom:9px"></div>
+      <div class="btn-stack">
+        <button class="btn btn-ghost" onclick="goTo('s-home')">← رجوع</button>
+        <button class="btn btn-red" onclick="clearLb()">مسح السجل</button>
+      </div>
+    </section>
+
+  </div><!-- screens-wrap -->
+
+  <div class="footer">
+    <span class="footer-name">عمرو عثمان</span>
+    <span style="color:var(--t3);font-size:0.5rem">◆</span>
+    <a href="https://instagram.com/q1jqq" target="_blank" class="footer-ig">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @q1jqq
+    </a>
+  </div>
+</div>
+
+<!-- SJ MODAL -->
+<div class="modal-overlay" id="sj-modal">
+  <div class="modal-box">
+    <div style="text-align:center"><div class="modal-pts-badge p200" id="modal-badge">200 نقطة</div></div>
+    <div style="font-family:var(--mono);font-size:0.5rem;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:6px" id="modal-cat">—</div>
+    <div class="modal-q-text" id="modal-q">—</div>
+    <div class="modal-ans-box" id="modal-ans-box" onclick="sjRevealAns()">
+      <div class="modal-ans-text" id="modal-ans-text">—</div>
+      <div class="modal-ans-hint" id="modal-ans-hint">اضغط لكشف الإجابة</div>
+    </div>
+    <div style="font-size:0.76rem;color:var(--t2);text-align:center;margin-bottom:9px">من أجاب صح؟</div>
+    <div style="display:grid;gap:7px;margin-bottom:9px" id="modal-judge-row"></div>
+    <button class="btn btn-ghost" onclick="sjSkip()">تخطي — بدون نقاط</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+// Category SVG icons
+const CAT_ICONS = {
+  "دول":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/></svg>",
+  "مدن":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><rect x='3' y='10' width='4' height='11'/><rect x='9' y='6' width='6' height='15'/><rect x='17' y='3' width='4' height='18'/><line x1='1' y1='21' x2='23' y2='21'/></svg>",
+  "أكلات":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2'/><line x1='7' y1='2' x2='7' y2='11'/><path d='M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7'/></svg>",
+  "لاعبو كرة قدم":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><polygon points='12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26'/></svg>",
+  "ألعاب":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><rect x='2' y='6' width='20' height='12' rx='2'/><path d='M12 12h.01'/><path d='M7 12h.01M17 12h.01'/><path d='M7 9v6'/></svg>",
+  "تطبيقات":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><rect x='5' y='2' width='14' height='20' rx='2'/><line x1='12' y1='18' x2='12.01' y2='18'/></svg>",
+  "شخصيات كرتون":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><path d='M8 14s1.5 2 4 2 4-2 4-2'/><line x1='9' y1='9' x2='9.01' y2='9'/><line x1='15' y1='9' x2='15.01' y2='9'/></svg>",
+  "مهن":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><rect x='2' y='7' width='20' height='14' rx='2'/><path d='M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'/><line x1='12' y1='12' x2='12' y2='12'/><path d='M12 12H2'/><path d='M22 12h-10'/></svg>",
+  "حيوانات":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M20 9V7a2 2 0 0 0-2-2h-6L9 2H7a2 2 0 0 0-2 2v10'/><path d='m9 21 3-3 3 3'/><path d='M5 21V11l7 1 7-1v10'/></svg>",
+  "أدوات منزلية":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/><polyline points='9 22 9 12 15 12 15 22'/></svg>",
+  "ملابس":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z'/></svg>",
+  "فواكه وخضروات":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>",
+  "سور قرآنية":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/><path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/></svg>",
+  "الأنبياء":"<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
+};
+
+const SJ_ICONS = {
+  "دينية":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>",
+  "رياضية":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10'/></svg>",
+  "معلومات عامة":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>",
+  "تاريخ":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>",
+  "علوم وتقنية":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H3m6 0h12m0 0V9m0 6v6a2 2 0 0 1-2 2H5a2 2 0 0 0-2-2v-6'/></svg>",
+  "جغرافيا":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><line x1='2' y1='12' x2='22' y2='12'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/></svg>",
+  "ثقافة خليجية":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/><circle cx='12' cy='10' r='3'/></svg>",
+  "سينما وترفيه":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><rect x='2' y='2' width='20' height='20' rx='2.18'/><line x1='7' y1='2' x2='7' y2='22'/><line x1='17' y1='2' x2='17' y2='22'/><line x1='2' y1='12' x2='22' y2='12'/><line x1='2' y1='7' x2='7' y2='7'/><line x1='2' y1='17' x2='7' y2='17'/><line x1='17' y1='17' x2='22' y2='17'/><line x1='17' y1='7' x2='22' y2='7'/></svg>",
+  "رياضيات":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><line x1='19' y1='5' x2='5' y2='19'/><circle cx='6.5' cy='6.5' r='2.5'/><circle cx='17.5' cy='17.5' r='2.5'/></svg>",
+  "أمثال وحكم":"<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg>"
+};
+
+
+// ═══ KHAREJ DB ═══
+const KDB={"دول":{icon:"🌍",words:["السعودية","مصر","الإمارات","الكويت","قطر","البحرين","عمان","العراق","الأردن","فلسطين","اليمن","سوريا","لبنان","تونس","الجزائر","المغرب","ليبيا","السودان","تركيا","أمريكا","بريطانيا","فرنسا","ألمانيا","إيطاليا","إسبانيا","روسيا","الصين","اليابان","الهند","البرازيل","الأرجنتين","كندا","أستراليا","المكسيك","هولندا","سويسرا","السويد","اليونان","كوريا الجنوبية","باكستان","إيران","ماليزيا","جنوب أفريقيا","النرويج","الدنمارك","بلجيكا","إندونيسيا","البرتغال","نيجيريا","النمسا"]},"مدن":{icon:"🏙️",words:["الرياض","مكة","المدينة","جدة","الدمام","أبها","تبوك","القاهرة","الإسكندرية","دبي","أبوظبي","الشارقة","الدوحة","الكويت","المنامة","مسقط","بغداد","دمشق","عمان","بيروت","القدس","تونس","الدار البيضاء","مراكش","طرابلس","لندن","باريس","نيويورك","طوكيو","روما","مدريد","برشلونة","إسطنبول","برلين","موسكو","سيدني","أمستردام","جنيف","ميلانو","شنغهاي","واشنطن","بكين","سيول","بانكوك","ساو باولو","لوس أنجلوس","مومباي","ليما","كيب تاون","دبلن"]},"أكلات":{icon:"🍔",words:["الكبسة","البيتزا","البرغر","الباستا","الشاورما","المندي","المظبي","الفلافل","الفول","الحمص","المحشي","الملوخية","الكشري","الكباب","الشيش طاووق","المنسف","المقلوبة","السوشي","الستيك","اللازانيا","الكبة","السمبوسك","البرياني","البخاري","الهوت دوغ","الفاهيتا","الكنافة","القطايف","أم علي","الرز بلبن","التشيز كيك","البسبوسة","الدوناتس","الكرواسون","الحواوشي","الهريس","المرقوق","الجريش","المطبق","المعصوب","الخبيصة","الشكشوكة","الطاجن","الكوسكس","البابا غنوج","المجبوس","الهبيت","المفالق","الرشوف","اللحم بالعجين"]},"لاعبو كرة قدم":{icon:"⚽",words:["رونالدو","ميسي","نيمار","مبابي","هالاند","محمد صلاح","بنزيما","مودريتش","دي بروين","ليفاندوفسكي","فينيسيوس","بيلينجهام","هاري كين","غريزمان","كيميش","مولر","نوير","كورتوا","أليسون","فان دايك","روبن دياس","حكيمي","رودري","رياض محرز","ساديو ماني","ياسين بونو","سالم الدوسري","زيدان","رونالدينيو","بيليه","مارادونا","توني كروس","راموس","زلاتان","سواريز","بوفون","إنييستا","تشافي","كاكا","لامين يامال","فيل فودن","بوكايو ساكا","ثيو هيرنانديز","جاو فيليكس","رييس","كولر","فيرمينو","إبراهيم دياز","أوسمان ديمبيلي","ماركوس راشفورد"]},"ألعاب":{icon:"🎮",words:["ببجي","فورتنايت","كول أوف ديوتي","فيفا","ماينكرافت","جي تي إيه","كلاش رويال","كلاش أوف كلانس","ليغ أوف ليجيندز","فالورانت","أوفروايتش","أبيكس","روكيت ليغ","أمونج أس","فول غايز","روبلوكس","سوبر ماريو","بوكيمون","زيلدا","إيلدن رينغ","داركسولز","إله الحرب","سبايدرمان","أساسنز كريد","سايبربانك","ويتشر","ريزيدنت إيفل","تومب رايدر","تيكن","مورتال كومبات","نيد فور سبيد","تيتريس","كاندي كراش","الطيور الغاضبة","تمبل ران","دووم","كراش بانديكوت","سونيك","باكمان","ديفل ماي كراي","هيدز","باتلفيلد","هيلو","ديدبول","سبلاتون","ديستيني","واتش دوغز","ريد ديد ريدمبشن","سبلاتون","أوفر ووتش"]},"تطبيقات":{icon:"📱",words:["واتساب","سناب شات","تيك توك","انستقرام","تويتر","يوتيوب","فيسبوك","تيليغرام","نتفليكس","سبوتيفاي","أوبر","كريم","أمازون","نون","لينكد إن","ديسكورد","زووم","بنتيريست","ريديت","تويتش","سيغنال","شازام","جوجل ماب","ترجمة جوجل","شاهد","وياك","أنغامي","ديزر","أبل ميوزيك","تيندر","بامبل","دوولينغو","كلوب هاوس","جوجل درايف","دروب بوكس","نوشن","ترللو","سلاك","مايكروسوفت تيمز","إيرتيبل"]},"شخصيات كرتون":{icon:"🦸",words:["سبونجبوب","باتمان","سبايدرمان","سوبرمان","ميكي ماوس","توم وجيري","دورا","ناروتو","غوكو","لوفي","ساسكي","بن عشرة","أستريكس","سيمبا","علاء الدين","هرقل","موغلي","شرك","كونغ فو باندا","زوتوبيا","آيس إيج","ديجيمون","بوكيمون","ليلو وستيتش","رالف","ميدا","ريمي","والي","دوري","نيمو","هيمان","شي را","باور رينجرز","دراغون بول","ون بيس","بليتش","ديث نوت","فولميتال","سيلور مون","بن تن"]},"مهن":{icon:"👨‍💼",words:["طبيب","مهندس","محامي","معلم","طيار","شرطي","جندي","ممرض","صيدلاني","محاسب","مصمم","مبرمج","صحفي","كاتب","فنان","موسيقي","مخرج","ممثل","رياضي","مدرب","طاهي","نجار","سباك","كهربائي","ميكانيكي","بناء","حارس أمن","سائق","طبيب أسنان","بيطري","اقتصادي","دبلوماسي","كيميائي","عالم أحياء","فلكي","جيولوجي","مصور","معماري","مترجم","باحث"]},"حيوانات":{icon:"🦁",words:["أسد","نمر","فيل","زرافة","حصان","كلب","قطة","أرنب","ثعلب","ذئب","دب","قرد","حوت","دلفين","قرش","تمساح","ثعبان","عقرب","نسر","بومة","طاووس","ببغاء","دجاجة","بقرة","خروف","ماعز","جمل","حمار","ديك","بطة","إوزة","فلامنغو","بطريق","كنغر","كوالا","باندا","وحيد القرن","فرس نهر","زيبرا","غزال"]},"أدوات منزلية":{icon:"🏠",words:["ثلاجة","غسالة","مكيف","تلفزيون","مكنسة","إبريق","كوب","صحن","مقلاة","قدر","سكين","شوكة","ملعقة","مكواة","خلاط","فرن","ميكروويف","مجفف شعر","كرسي","طاولة","سرير","خزانة","مرآة","سجادة","وسادة","بطانية","ستارة","مصباح","مروحة","طنجرة ضغط","عصارة","توستر","برادة مياه","صنبور","دش","حوض","مشط","سشوار","جرس","باب"]},"ملابس":{icon:"👔",words:["ثوب","بشت","عقال","غترة","جاكيت","بنطلون","فستان","تنورة","قميص","تيشيرت","سترة","كبوت","شماغ","عباءة","حجاب","حذاء","صندل","شبشب","جزمة","خف","جوارب","تراكسوت","بنطلون قصير","ملابس داخلية","كاب","طاقية","قفازات","حزام","ربطة عنق","بلوزة","كارديقان","هودي","قميص بولو","سروال رياضي","تي شيرت رياضي","حذاء رياضي","منتو","أوفرول","بجامة","جلابية"]},"فواكه وخضروات":{icon:"🍎",words:["تفاح","موز","برتقال","عنب","بطيخ","شمام","مانجو","فراولة","تمر","رمان","كيوي","أناناس","توت","خوخ","مشمش","إجاص","تين","زيتون","ليمون","جريب فروت","طماطم","خيار","جزر","بطاطس","بصل","ثوم","فلفل","باذنجان","كوسا","قرع","سبانخ","خس","ملوخية","فاصوليا","عدس","بروكلي","قرنبيط","ذرة","بازلاء","فجل"]},"سور قرآنية":{icon:"📖",words:["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","الحشر","الصف","الجمعة","الملك","القلم","الحاقة","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","النبأ","النازعات","عبس","التكوير","الانفطار","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"]},"الأنبياء":{icon:"🌙",words:["آدم","إدريس","نوح","هود","صالح","إبراهيم","لوط","إسماعيل","إسحاق","يعقوب","يوسف","شعيب","أيوب","موسى","هارون","ذو الكفل","داود","سليمان","إلياس","اليسع","يونس","زكريا","يحيى","عيسى","محمد"]}};
+
+// ═══ SIN JIM DB ═══
+const SJDB={"دينية":{icon:"🌙",qs:[{q:"كم عدد سور القرآن الكريم؟",a:"١١٤ سورة",pts:200},{q:"ما أطول سورة في القرآن؟",a:"سورة البقرة",pts:200},{q:"من خاتم الأنبياء؟",a:"سيدنا محمد ﷺ",pts:200},{q:"كم عدد أركان الإسلام؟",a:"خمسة",pts:200},{q:"في أي شهر نزل القرآن؟",a:"رمضان",pts:200},{q:"ما أقصر سورة في القرآن؟",a:"الكوثر",pts:200},{q:"كم ركعة صلاة الفجر؟",a:"ركعتان",pts:200},{q:"ما اسم والد إبراهيم؟",a:"آزر",pts:400},{q:"ما أول مسجد في الإسلام؟",a:"مسجد قباء",pts:400},{q:"من أول من أسلم من الرجال؟",a:"أبو بكر الصديق",pts:200},{q:"كم عدد الأنبياء في القرآن؟",a:"٢٥ نبياً",pts:400},{q:"ما أول آية نزلت؟",a:"اقرأ باسم ربك الذي خلق",pts:400},{q:"من سيف الله المسلول؟",a:"خالد بن الوليد",pts:400},{q:"كم أسماء الله الحسنى؟",a:"٩٩ اسماً",pts:200},{q:"من اشترى بلالاً من العبودية؟",a:"أبو بكر الصديق",pts:400},{q:"ما الحيوان المذكور في سورة باسمه؟",a:"النمل",pts:600},{q:"كم غزوة غزا النبي ﷺ؟",a:"٢٧ غزوة",pts:600},{q:"ما آخر سورة نزلت كاملة؟",a:"سورة النصر",pts:600},{q:"ما اسم أبو النبي ﷺ؟",a:"عبدالله",pts:200},{q:"ما اسم جد النبي الذي رباه؟",a:"عبدالمطلب",pts:400},{q:"كم عمر النبي ﷺ حين توفي؟",a:"٦٣ سنة",pts:600},{q:"ما اسم غزوة الخندق الأخرى؟",a:"غزوة الأحزاب",pts:400},{q:"ما السورة التي تعادل ثلث القرآن؟",a:"سورة الإخلاص",pts:400},{q:"من الملك الموكل بالوحي؟",a:"جبريل عليه السلام",pts:200},{q:"من صاحب صحيح البخاري؟",a:"الإمام البخاري",pts:400},{q:"ما اسم أم المؤمنين الأولى؟",a:"السيدة خديجة",pts:200},{q:"في أي بلد ولد النبي ﷺ؟",a:"مكة المكرمة",pts:200},{q:"كم سنة دعوة نوح عليه السلام؟",a:"٩٥٠ سنة",pts:600},{q:"ما اسم أم الكتاب؟",a:"سورة الفاتحة",pts:200},{q:"ما في جبل نزل الوحي؟",a:"جبل النور (حراء)",pts:400}]},"رياضية":{icon:"⚽",qs:[{q:"من فاز بكأس العالم ٢٠٢٢؟",a:"الأرجنتين",pts:200},{q:"كم مرة فازت البرازيل بكأس العالم؟",a:"خمس مرات",pts:200},{q:"من أكثر هداف في التاريخ؟",a:"كريستيانو رونالدو",pts:200},{q:"ما ملعب ريال مدريد؟",a:"سانتياغو برنابيو",pts:200},{q:"كم مدة مباراة كرة القدم؟",a:"٩٠ دقيقة",pts:200},{q:"من فاز بدوري الأبطال الأكثر؟",a:"ريال مدريد",pts:200},{q:"من أسرع رجل في العالم؟",a:"أوساين بولت",pts:200},{q:"كم لاعب في كرة السلة؟",a:"خمسة لاعبين",pts:200},{q:"كم مرة فاز ميسي بالكرة الذهبية؟",a:"٨ مرات",pts:400},{q:"ما رقم سباق ١٠٠ متر؟",a:"٩.٥٨ ثانية",pts:400},{q:"من فاز بكأس العالم ٢٠١٨؟",a:"فرنسا",pts:200},{q:"كم مرة فازت ألمانيا بكأس العالم؟",a:"أربع مرات",pts:400},{q:"من فاز بأكثر بطولات ويمبلدون؟",a:"نوفاك ديوكوفيتش",pts:400},{q:"كم لاعب في كرة الطائرة؟",a:"ستة لاعبين",pts:200},{q:"ما ارتفاع حلقة كرة السلة؟",a:"٣.٠٥ متر",pts:400},{q:"في أي دولة اخترعت الجودو؟",a:"اليابان",pts:200},{q:"ما ملعب برشلونة؟",a:"كامب نو",pts:200},{q:"كم كيلو وزن كرة القدم؟",a:"٤١٠-٤٥٠ غرام",pts:400},{q:"من مدرب السعودية في مونديال ٢٠٢٢؟",a:"هيرفي رينار",pts:400},{q:"من فاز بأكثر رولان غاروس؟",a:"رافاييل نادال ١٤ مرة",pts:600},{q:"في أي مدينة أولمبياد ٢٠٢٨؟",a:"لوس أنجلوس",pts:400},{q:"من أصغر فائز بكأس العالم؟",a:"بيليه - ١٧ سنة",pts:600},{q:"كم ذهبية لمايكل فيلبس؟",a:"٢٣ ميدالية ذهبية",pts:600},{q:"من أكثر هداف في الدوري الإنجليزي؟",a:"آلان شيرر",pts:600},{q:"ما طول ملعب كرة القدم؟",a:"٩٠-١٢٠ متر",pts:400},{q:"ما الفريق العربي الأول في كأس العالم؟",a:"المغرب ١٩٧٠",pts:600},{q:"كم دقيقة الوقت الإضافي؟",a:"٣٠ دقيقة شوطان",pts:400},{q:"ما اسم اتحاد كرة القدم الدولي؟",a:"FIFA",pts:200},{q:"من مؤسس الأولمبياد الحديثة؟",a:"بيير دي كوبرتان",pts:600},{q:"ما أول دولة استضافت الأولمبياد؟",a:"اليونان ١٨٩٦",pts:400}]},"معلومات عامة":{icon:"🧠",qs:[{q:"ما أكبر دولة مساحةً؟",a:"روسيا",pts:200},{q:"كم عدد قارات العالم؟",a:"سبع قارات",pts:200},{q:"ما أطول نهر في العالم؟",a:"نهر النيل",pts:200},{q:"ما عاصمة أستراليا؟",a:"كانبيرا",pts:400},{q:"ما أصغر دولة في العالم؟",a:"الفاتيكان",pts:200},{q:"كم درجة غليان الماء؟",a:"١٠٠ درجة مئوية",pts:200},{q:"ما أعلى قمة في العالم؟",a:"جبل إيفرست",pts:200},{q:"ما أسرع حيوان بري؟",a:"الفهد",pts:200},{q:"كم عظمة في الإنسان؟",a:"٢٠٦ عظمة",pts:400},{q:"ما الكوكب الأقرب للشمس؟",a:"عطارد",pts:200},{q:"من اخترع الهاتف؟",a:"ألكسندر غراهام بيل",pts:200},{q:"كم كوكب في المجموعة الشمسية؟",a:"ثمانية كواكب",pts:200},{q:"ما أكبر محيط؟",a:"المحيط الهادئ",pts:200},{q:"من اخترع الطائرة؟",a:"الأخوان رايت",pts:200},{q:"ما أصغر عظمة في الجسم؟",a:"عظمة الركاب في الأذن",pts:400},{q:"كم سرعة الضوء؟",a:"٣٠٠ ألف كم/ثانية",pts:400},{q:"ما الغاز الأكثر في الغلاف الجوي؟",a:"النيتروجين",pts:400},{q:"ما أعمق نقطة في المحيطات؟",a:"خندق ماريانا",pts:400},{q:"كم أسنان الإنسان البالغ؟",a:"٣٢ سناً",pts:200},{q:"ما أكبر كوكب في المجموعة الشمسية؟",a:"المشتري",pts:200},{q:"من اخترع الكمبيوتر؟",a:"تشارلز بابيج",pts:400},{q:"ما عمر الكون التقريبي؟",a:"١٣.٨ مليار سنة",pts:600},{q:"ما أكبر جزيرة؟",a:"غرينلاند",pts:400},{q:"ما أعمق بحيرة؟",a:"بحيرة بايكال",pts:600},{q:"كم دولة في الاتحاد الأوروبي؟",a:"٢٧ دولة",pts:400},{q:"ما ارتفاع إيفرست؟",a:"٨٨٤٨ متر",pts:400},{q:"ما أطول نهر في آسيا؟",a:"نهر اليانغتسي",pts:600},{q:"كم لغة رسمية في زيمبابوي؟",a:"١٦ لغة",pts:600},{q:"ما عاصمة كندا؟",a:"أوتاوا",pts:400},{q:"من اخترع المصباح؟",a:"توماس إديسون",pts:200}]},"تاريخ":{icon:"📜",qs:[{q:"في أي سنة اكتشف كولومبوس أمريكا؟",a:"١٤٩٢",pts:200},{q:"من بنى الأهرامات؟",a:"الفراعنة المصريون",pts:200},{q:"في أي سنة انتهت الحرب العالمية الثانية؟",a:"١٩٤٥",pts:200},{q:"من أول إنسان مشى على القمر؟",a:"نيل أرمسترونغ",pts:200},{q:"في أي سنة سقط الاتحاد السوفيتي؟",a:"١٩٩١",pts:200},{q:"من بنى الكعبة؟",a:"إبراهيم وإسماعيل عليهما السلام",pts:200},{q:"في أي سنة تأسست السعودية؟",a:"١٩٣٢",pts:200},{q:"من فاتح الأندلس؟",a:"طارق بن زياد",pts:400},{q:"في أي سنة الثورة الفرنسية؟",a:"١٧٨٩",pts:400},{q:"من أول خليفة في الإسلام؟",a:"أبو بكر الصديق",pts:200},{q:"من احتل بغداد من المغول؟",a:"هولاكو خان",pts:400},{q:"في أي سنة سقطت الدولة العثمانية؟",a:"١٩٢٤",pts:400},{q:"من مخترع المصباح؟",a:"توماس إديسون",pts:200},{q:"في أي سنة ثورة أكتوبر الروسية؟",a:"١٩١٧",pts:400},{q:"من أطول حاكم فرعوني؟",a:"رمسيس الثاني",pts:600},{q:"في أي سنة أول قمر صناعي؟",a:"١٩٥٧ سبوتنيك",pts:400},{q:"من بنى سور الصين؟",a:"الإمبراطور قين شي هوانغ",pts:600},{q:"في أي سنة بدأت الحرب العالمية الأولى؟",a:"١٩١٤",pts:200},{q:"من مؤسس الدولة السعودية الأولى؟",a:"محمد بن سعود",pts:400},{q:"في أي سنة توفي النبي ﷺ؟",a:"٦٣٢ ميلادية",pts:400},{q:"من ألغى العبودية في أمريكا؟",a:"أبراهام لينكولن",pts:400},{q:"ما أطول حرب في التاريخ؟",a:"حرب المئة عام",pts:600},{q:"في أي سنة اخترع غوتنبرج المطبعة؟",a:"١٤٤٠",pts:600},{q:"من فاتح فارس؟",a:"سعد بن أبي وقاص",pts:400},{q:"ما آخر فراعنة مصر؟",a:"كليوباترا",pts:600},{q:"من مؤسس الإمبراطورية الرومانية؟",a:"أوغسطس قيصر",pts:600},{q:"في أي سنة وحدة الإمارات؟",a:"١٩٧١",pts:200},{q:"من اخترع البارود؟",a:"الصينيون",pts:600},{q:"في أي سنة بنيت الأهرامات؟",a:"٢٥٠٠ قبل الميلاد",pts:400},{q:"ما اسم معركة فتح مكة؟",a:"فتح مكة ٨ هجرية",pts:400}]},"علوم وتقنية":{icon:"🔬",qs:[{q:"ما رمز الذهب الكيميائي؟",a:"Au",pts:400},{q:"كم كروموسوم للإنسان؟",a:"٤٦",pts:400},{q:"ما أخف عنصر في الجدول الدوري؟",a:"الهيدروجين",pts:200},{q:"ما صيغة الماء؟",a:"H₂O",pts:200},{q:"ما أصلب معدن طبيعي؟",a:"الماس",pts:200},{q:"ما الغاز الذي تنتجه النباتات؟",a:"الأكسجين",pts:200},{q:"من وضع نظرية النسبية؟",a:"ألبرت آينشتاين",pts:200},{q:"ما الكوكب الأحمر؟",a:"المريخ",pts:200},{q:"ما أكبر عضو في الجسم؟",a:"الجلد",pts:200},{q:"كم يستغرق دوران الأرض؟",a:"٢٤ ساعة",pts:200},{q:"من اكتشف قانون الجاذبية؟",a:"إسحاق نيوتن",pts:200},{q:"من مؤسس آبل؟",a:"ستيف جوبز",pts:200},{q:"في أي سنة أسست جوجل؟",a:"١٩٩٨",pts:200},{q:"من مؤسس مايكروسوفت؟",a:"بيل غيتس وبول ألن",pts:200},{q:"في أي سنة أطلق أول آيفون؟",a:"٢٠٠٧",pts:200},{q:"ما رمز الحديد الكيميائي؟",a:"Fe",pts:400},{q:"كم نوع فصائل الدم؟",a:"أربعة: A,B,AB,O",pts:400},{q:"ما العنصر الأكثر في قشرة الأرض؟",a:"الأكسجين",pts:400},{q:"ما رمز الفضة؟",a:"Ag",pts:400},{q:"كم قمر لزحل؟",a:"أكثر من ١٤٦ قمراً",pts:600},{q:"من مؤسس تيسلا؟",a:"إيلون ماسك",pts:200},{q:"ما معنى HTML؟",a:"HyperText Markup Language",pts:400},{q:"ما أول متصفح إنترنت؟",a:"WorldWideWeb 1991",pts:600},{q:"ما معنى VPN؟",a:"Virtual Private Network",pts:400},{q:"من مؤسس أمازون؟",a:"جيف بيزوس",pts:200},{q:"ما ChatGPT؟",a:"نموذج ذكاء اصطناعي من OpenAI",pts:200},{q:"ما الفرق بين SSD وHDD؟",a:"SSD أسرع وصلبة",pts:400},{q:"ما معنى GPS؟",a:"Global Positioning System",pts:400},{q:"ما معنى AI؟",a:"Artificial Intelligence",pts:200},{q:"في أي سنة تأسست فيسبوك؟",a:"٢٠٠٤",pts:200}]},"جغرافيا":{icon:"🗺️",qs:[{q:"ما عاصمة البرازيل؟",a:"برازيليا",pts:400},{q:"على أي نهر تقع لندن؟",a:"نهر التيمز",pts:200},{q:"ما أكبر صحراء في العالم؟",a:"أنتاركتيكا",pts:600},{q:"ما أعلى سلسلة جبال؟",a:"جبال الهيمالايا",pts:200},{q:"كم دولة في أفريقيا؟",a:"٥٤ دولة",pts:400},{q:"ما أكبر جزيرة؟",a:"غرينلاند",pts:400},{q:"ما أطول سلسلة جبلية؟",a:"جبال الأنديز",pts:600},{q:"ما أعمق بحيرة؟",a:"بحيرة بايكال",pts:400},{q:"كم دولة في الخليج؟",a:"ست دول",pts:200},{q:"ما عاصمة كندا؟",a:"أوتاوا",pts:400},{q:"ما الدولة التي هي قارة؟",a:"أستراليا",pts:200},{q:"ما أطول نهر في آسيا؟",a:"نهر اليانغتسي",pts:600},{q:"كم محيط في العالم؟",a:"خمسة محيطات",pts:200},{q:"ما أكثر دول العالم سكاناً؟",a:"الهند",pts:200},{q:"ما محيط الأرض؟",a:"٤٠,٠٧٥ كيلومتر",pts:600},{q:"ما أطول حد بري بين دولتين؟",a:"أمريكا وكندا",pts:600},{q:"في أي بلد جبل كليمنجارو؟",a:"تنزانيا",pts:400},{q:"ما بين مضيق جبل طارق؟",a:"إسبانيا والمغرب",pts:400},{q:"ما أكبر بحيرة؟",a:"بحر قزوين",pts:600},{q:"ما ارتفاع إيفرست؟",a:"٨٨٤٨ متر",pts:400},{q:"كم دولة في الاتحاد الأوروبي؟",a:"٢٧ دولة",pts:400},{q:"أين نهر الأمازون؟",a:"أمريكا الجنوبية",pts:200},{q:"ما أكبر بلد في أمريكا اللاتينية؟",a:"البرازيل",pts:200},{q:"ما أصغر قارة؟",a:"أستراليا",pts:200},{q:"ما عاصمة نيوزيلندا؟",a:"ويلينغتون",pts:600},{q:"في أي قارة المغرب؟",a:"أفريقيا",pts:200},{q:"ما طول قناة السويس؟",a:"١٩٣ كيلومتر",pts:600},{q:"ما أكثر دول جزراً؟",a:"السويد",pts:600},{q:"ما عاصمة كازاخستان؟",a:"أستانة",pts:600},{q:"كم مليون كيلومتر مربع مساحة روسيا؟",a:"١٧ مليون",pts:600}]},"ثقافة خليجية":{icon:"🌴",qs:[{q:"ما عاصمة السعودية؟",a:"الرياض",pts:200},{q:"ما المشروب التراثي الخليجي الأشهر؟",a:"القهوة العربية",pts:200},{q:"في أي سنة تأسس مجلس التعاون؟",a:"١٩٨١",pts:400},{q:"في أي دولة برج خليفة؟",a:"الإمارات - دبي",pts:200},{q:"ما ارتفاع برج خليفة؟",a:"٨٢٨ متر",pts:400},{q:"في أي سنة وحدة الإمارات؟",a:"١٩٧١",pts:200},{q:"ما الرياضة التقليدية في الإمارات؟",a:"الصقارة",pts:400},{q:"ما عملة البحرين؟",a:"الدينار البحريني",pts:200},{q:"ما أطول جسر في الخليج؟",a:"جسر الملك فهد",pts:400},{q:"ما الحرفة التقليدية لنسج الأقمشة؟",a:"السدو",pts:600},{q:"في أي مدينة مسجد الشيخ زايد؟",a:"أبوظبي",pts:200},{q:"ما معنى يا هلا؟",a:"أهلاً وسهلاً",pts:200},{q:"ما اسم الثوب الأبيض الخليجي؟",a:"الثوب أو الدشداشة",pts:200},{q:"ما أشهر بهارات الكبسة؟",a:"الهيل والزعفران والقرفة",pts:400},{q:"ما القرقيعان؟",a:"احتفال شعبي في منتصف رمضان",pts:400},{q:"في أي مدينة برج المملكة؟",a:"الرياض",pts:200},{q:"ما أطول مترو في الشرق الأوسط؟",a:"مترو الرياض",pts:600},{q:"ما عملة قطر؟",a:"الريال القطري",pts:200},{q:"من مؤسس الإمارات؟",a:"الشيخ زايد بن سلطان آل نهيان",pts:400},{q:"كم دولة في مجلس التعاون؟",a:"ست دول",pts:200},{q:"ما أشهر رقصة خليجية؟",a:"العرضة السعودية",pts:400},{q:"ما ملعب مونديال قطر؟",a:"ملعب لوسيل",pts:400},{q:"في أي سنة كأس العالم في قطر؟",a:"٢٠٢٢",pts:200},{q:"ما أعلى برج في السعودية؟",a:"برج أبراج البيت مكة",pts:600},{q:"ما معنى كشتة؟",a:"نزهة خارجية في الطبيعة",pts:200},{q:"ما رقصة الدحة؟",a:"رقصة شعبية خليجية جماعية",pts:400},{q:"في أي مدينة مطار الملك عبدالعزيز؟",a:"جدة",pts:200},{q:"ما السمة المميزة للكوفية الكويتية؟",a:"نقشها المميز وألوانها",pts:600},{q:"ما معنى دشداشة؟",a:"الثوب التقليدي الطويل",pts:200},{q:"ما الجهة التي يحدها الخليج من الشرق؟",a:"إيران",pts:400}]},"سينما وترفيه":{icon:"🎬",qs:[{q:"من أخرج Inception؟",a:"كريستوفر نولان",pts:400},{q:"ما أعلى فيلم إيراداً؟",a:"أفاتار",pts:200},{q:"من يؤدي توني ستارك؟",a:"روبرت داوني جونيور",pts:200},{q:"كم موسم في Game of Thrones؟",a:"ثمانية مواسم",pts:200},{q:"ما أول فيلم ديزني متحرك؟",a:"سنو وايت ١٩٣٧",pts:400},{q:"من أخرج Lord of the Rings؟",a:"بيتر جاكسون",pts:400},{q:"كم فيلم في هاري بوتر؟",a:"ثمانية أفلام",pts:200},{q:"من يمثل باتمان في Dark Knight؟",a:"كريستيان بيل",pts:200},{q:"كم موسم في Friends؟",a:"عشرة مواسم",pts:200},{q:"ما اسم الشرير في Avengers؟",a:"ثانوس",pts:200},{q:"من أخرج تيتانيك؟",a:"جيمس كاميرون",pts:200},{q:"ما اسم الجن في Aladdin؟",a:"جيني",pts:200},{q:"ما أكثر مسلسل مشاهدة في نتفليكس؟",a:"Squid Game",pts:200},{q:"في أي عام أول Spider-Man؟",a:"٢٠٠٢",pts:400},{q:"ما اسم الفتاة في تيتانيك؟",a:"روز",pts:200},{q:"من غنى Bohemian Rhapsody؟",a:"فريدي ميركوري",pts:200},{q:"كم فيلم في Star Wars؟",a:"تسعة أفلام رئيسية",pts:400},{q:"من أخرج Avengers Endgame؟",a:"الأخوان روسو",pts:600},{q:"في أي سنة أول فيلم في التاريخ؟",a:"١٨٩٥",pts:400},{q:"كم موسم في Stranger Things؟",a:"أربعة مواسم",pts:200},{q:"ما أول فيلم Pixar؟",a:"Toy Story 1995",pts:200},{q:"من يصوّت Elsa في Frozen؟",a:"إيدينا منزيل",pts:400},{q:"من يمثل الجوكر في فيلم ٢٠١٩؟",a:"خواكين فينيكس",pts:200},{q:"من أخرج Dune؟",a:"دوني فيلنوف",pts:600},{q:"ما أول مسلسل عربي على نتفليكس؟",a:"Jinn - الجن ٢٠١٩",pts:600},{q:"كم أوسكار فاز فيلم Oppenheimer؟",a:"سبعة أوسكارات",pts:600},{q:"من مخرج Interstellar؟",a:"كريستوفر نولان",pts:400},{q:"ما أصل فيلم Spirited Away؟",a:"ياباني - من ستوديو Ghibli",pts:600},{q:"كم فيلم في سلسلة Fast and Furious؟",a:"١١ فيلماً رئيسياً",pts:400},{q:"من أخرج The Dark Knight؟",a:"كريستوفر نولان",pts:400}]},"رياضيات":{icon:"🔢",qs:[{q:"كم يساوي ٧×٨؟",a:"٥٦",pts:200},{q:"ما الجذر التربيعي لـ١٤٤؟",a:"١٢",pts:200},{q:"كم درجة زوايا المثلث؟",a:"١٨٠ درجة",pts:200},{q:"ما قيمة π؟",a:"٣.١٤١٥٩",pts:200},{q:"كم يساوي ٢ بالقوة ١٠؟",a:"١٠٢٤",pts:400},{q:"ما أصغر عدد أولي؟",a:"٢",pts:200},{q:"كم وجه للمكعب؟",a:"ستة وجوه",pts:200},{q:"ما ناتج ٩٩×٩٩؟",a:"٩٨٠١",pts:400},{q:"ما مساحة مربع بضلع ٥؟",a:"٢٥",pts:200},{q:"كم يساوي ١٥٪ من ٢٠٠؟",a:"٣٠",pts:200},{q:"ما ناتج ٧+٨×٢؟",a:"٢٣",pts:400},{q:"كم ضلع للمسدس؟",a:"ستة أضلاع",pts:200},{q:"ما ناتج جمع ١ إلى ١٠؟",a:"٥٥",pts:400},{q:"كم يساوي √٢٥٦؟",a:"١٦",pts:400},{q:"ما مربع ١٣؟",a:"١٦٩",pts:400},{q:"كم يساوي ٢٥٪ من ١٦٠؟",a:"٤٠",pts:200},{q:"ما ناتج ١٠٠٠-٣٧٥؟",a:"٦٢٥",pts:200},{q:"كم يساوي ٤! عاملي؟",a:"٢٤",pts:600},{q:"ما الأعداد الأولية بين ٢٠ و٣٠؟",a:"٢٣ و٢٩",pts:600},{q:"كم يساوي ٠.٥×٢٠٠؟",a:"١٠٠",pts:200},{q:"ما ناتج ١٢٣×٣؟",a:"٣٦٩",pts:200},{q:"كم يساوي نصف ٧٥٨؟",a:"٣٧٩",pts:200},{q:"ما ناتج ١٠٠٠÷٨؟",a:"١٢٥",pts:400},{q:"ما قانون مساحة الدائرة؟",a:"π × r²",pts:400},{q:"كم درجة زوايا المربع؟",a:"٤ زوايا ٩٠",pts:200},{q:"ما الفرق بين القطر والنصف قطر؟",a:"القطر ضعف النصف قطر",pts:400},{q:"كم يساوي ٦ بالقوة ٣؟",a:"٢١٦",pts:600},{q:"ما ناتج ٢٥٠×٤؟",a:"١٠٠٠",pts:200},{q:"كم يساوي ٣ بالقوة ٦؟",a:"٧٢٩",pts:600},{q:"ما ناتج ١٠٠٠٠÷٢٥؟",a:"٤٠٠",pts:400}]},"أمثال وحكم":{icon:"💬",qs:[{q:"أكمل: العقل السليم...",a:"في الجسم السليم",pts:200},{q:"أكمل: الصديق وقت...",a:"الضيق",pts:200},{q:"أكمل: العلم في الصغر...",a:"كالنقش على الحجر",pts:200},{q:"أكمل: من جدّ...",a:"وجد",pts:200},{q:"أكمل: الوقت كالسيف...",a:"إن لم تقطعه قطعك",pts:200},{q:"أكمل: اضرب حديدك...",a:"وهو حار",pts:200},{q:"أكمل: لا تؤجل عمل اليوم...",a:"إلى الغد",pts:200},{q:"ما معنى جاء يكحلها عماها؟",a:"أراد الإصلاح فزاد الأمر سوءاً",pts:400},{q:"ما معنى الطيور على أشكالها تقع؟",a:"يتجمع المتشابهون",pts:200},{q:"ما معنى لكل مقام مقال؟",a:"لكل موقف كلام مناسب",pts:400},{q:"أكمل: المرء مخبوء...",a:"تحت لسانه",pts:400},{q:"ما معنى إياك أعني واسمعي يا جارة؟",a:"التلميح لشخص بكلام موجه لآخر",pts:400},{q:"أكمل: العجلة من...",a:"الشيطان",pts:200},{q:"ما معنى أعطِ الخبز لخبازه؟",a:"اترك كل عمل لأهله",pts:400},{q:"أكمل: الحكمة ضالة...",a:"المؤمن",pts:400},{q:"ما معنى البعد يعلمك القرب؟",a:"تدرك قيمة الشيء عند فقدانه",pts:400},{q:"ما معنى بيض ولا تفقس؟",a:"لا تتبجح بما لم تنجزه",pts:600},{q:"أكمل: التوبة تجب...",a:"ما قبلها",pts:400},{q:"ما معنى الأسد في قفصه مهاب؟",a:"للإنسان هيبة حتى في ضعفه",pts:600},{q:"ما معنى قبل الرمي امش الهدف؟",a:"تأكد قبل أن تتصرف",pts:400},{q:"أكمل: كل فعلة...",a:"ولها حصاد",pts:200},{q:"ما معنى ما كل ما يتمنى المرء يدركه؟",a:"لا يتحقق كل ما يتمنى الإنسان",pts:400},{q:"ما معنى اللي يتجوز أمي أقوله عمي؟",a:"التكيف مع الواقع",pts:600},{q:"أكمل: من سلك طريقاً...",a:"يلتمس فيه علماً",pts:400},{q:"ما معنى الجار قبل الدار؟",a:"اختر جارك قبل منزلك",pts:200},{q:"أكمل: خير الكلام...",a:"ما قل ودل",pts:600},{q:"أكمل: إن كنت في نعمة...",a:"فاصنها",pts:400},{q:"ما معنى رب كلمة؟",a:"تقول لصاحبها دعي",pts:600},{q:"أكمل: من صبر...",a:"ظفر",pts:200},{q:"ما مثل معناه الصراحة؟",a:"الحق يعلو ولا يعلى عليه",pts:600}]}};
+
+// ═══ STATE ═══
+let scores={};
+function saveScores(){try{localStorage.setItem('ksh_v4',JSON.stringify(scores));}catch(e){}}
+function loadScores(){try{const d=localStorage.getItem('ksh_v4');if(d)scores=JSON.parse(d);}catch(e){scores={};}}
+function ensureScore(n){if(!scores[n])scores[n]=0;}
+function clearLb(){if(!confirm('مسح كل السجل؟'))return;scores={};saveScores();renderGlobalLb();showToast('تم المسح');}
+
+function goTo(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function openLb(){renderGlobalLb();goTo('s-lb');}
+
+// ═══ KHAREJ ═══
+let K={category:'',players:[],roles:[],ri:0,flipped:false,spyIdx:null,vi:0,vOpened:false,votes:{},chosen:null,delta:{},wordRevealed:false,accusedIdx:null};
+
+function kRenderCats(){
+  const g=document.getElementById('k-cats-grid');g.innerHTML='';
+  for(const[name,data]of Object.entries(KDB)){
+    const d=document.createElement('div');d.className='cat-card';
+    const ico=CAT_ICONS[name]||'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg>';
+    d.innerHTML=`<div class="cat-icon-wrap" style="color:var(--gold)">${ico}</div><div class="cat-name">${name}</div><div class="cat-count">${data.words.length} كلمة</div>`;
+    d.onclick=()=>{document.querySelectorAll('#k-cats-grid .cat-card').forEach(c=>c.classList.remove('selected'));d.classList.add('selected');K.category=name;setTimeout(()=>goTo('s-k-players'),200);};
+    g.appendChild(d);
+  }
+}
+function kAdd(){
+  const inp=document.getElementById('k-p-inp');const name=inp.value.trim();
+  if(!name)return;if(K.players.includes(name)){showToast('الاسم مضاف');inp.value='';return;}
+  if(K.players.length>=12){showToast('الحد الأقصى ١٢');return;}
+  K.players.push(name);ensureScore(name);inp.value='';inp.focus();kRenderPlayers();
+}
+function kRemove(i){K.players.splice(i,1);kRenderPlayers();}
+function kRenderPlayers(){
+  const list=document.getElementById('k-p-list');
+  document.getElementById('k-cnt').textContent=K.players.length;
+  if(!K.players.length){list.innerHTML='';list.appendChild(document.getElementById('k-p-empty'));document.getElementById('k-btn-start').style.display='none';return;}
+  list.innerHTML='';
+  K.players.forEach((p,i)=>{
+    const li=document.createElement('li');li.className='p-item';
+    li.innerHTML=`<span class="p-num">٠${i+1}</span><span class="p-name-txt">${esc(p)}</span><span class="p-pts-badge">${scores[p]||0}</span><button class="btn-rm" onclick="kRemove(${i})">إزالة</button>`;
+    list.appendChild(li);
+  });
+  document.getElementById('k-btn-start').style.display=K.players.length>=3?'flex':'none';
+}
+function kStartReveal(){
+  if(K.players.length<3){showToast('يجب ٣ لاعبين');return;}
+  const words=KDB[K.category].words;
+  const word=words[Math.floor(Math.random()*words.length)];
+  K.spyIdx=Math.floor(Math.random()*K.players.length);
+  K.roles=K.players.map((name,i)=>({name,isSpy:i===K.spyIdx,word}));
+  K.ri=0;K.flipped=false;K.votes={};K.vi=0;K.vOpened=false;K.chosen=null;K.accusedIdx=null;K.wordRevealed=false;
+  K.delta={};K.players.forEach(n=>{K.delta[n]=0;});
+  kSetupReveal();goTo('s-k-reveal');
+}
+function kSetupReveal(){
+  const p=K.roles[K.ri];
+  document.getElementById('k-rev-name').textContent=p.name;
+  const prog=document.getElementById('k-rev-prog');prog.innerHTML='';
+  K.roles.forEach((_,i)=>{const pip=document.createElement('div');pip.className='pip'+(i<K.ri?' done':i===K.ri?' active':'');prog.appendChild(pip);});
+  document.getElementById('k-flip').classList.remove('flipped');
+  document.getElementById('k-btn-next-rev').style.display='none';K.flipped=false;
+  const back=document.getElementById('k-flip-back');
+  if(p.isSpy){back.className='flip-b spy';back.innerHTML=`<div class="c-badge s">خارج السالفة</div><div class="c-main s">أنت الجاسوس</div><div class="c-sub">استمع جيداً ولا تنكشف!</div>`;}
+  else{back.className='flip-b';back.innerHTML=`<div class="c-badge n">الكلمة السرية</div><div class="c-main n">${esc(p.word)}</div><div class="c-sub">الفئة: ${esc(K.category)}</div>`;}
+}
+function kFlip(){if(K.flipped)return;K.flipped=true;SFX.flip();document.getElementById('k-flip').classList.add('flipped');document.getElementById('k-btn-next-rev').style.display='flex';}
+function kNextReveal(){
+  document.getElementById('k-flip').classList.remove('flipped');K.flipped=false;
+  setTimeout(()=>{K.ri++;if(K.ri<K.roles.length){kSetupReveal();}else{kStartGame();}},320);
+}
+function kStartGame(){
+  document.getElementById('k-g-cat').textContent=K.category;
+  document.getElementById('k-g-cnt').textContent=K.players.length;
+  const g=document.getElementById('k-chips');g.innerHTML='';
+  K.players.forEach(name=>{const c=document.createElement('div');c.className='chip';c.innerHTML=`<div class="chip-av">${name.charAt(0)}</div><div class="chip-name">${esc(name)}</div>`;g.appendChild(c);});
+  goTo('s-k-game');
+}
+function kStartVoting(){K.vi=0;K.votes={};K.vOpened=false;K.chosen=null;kSetupVote();goTo('s-k-vote');}
+function kSetupVote(){
+  const voter=K.players[K.vi];
+  document.getElementById('k-vote-name').textContent=voter;
+  K.vOpened=false;K.chosen=null;
+  const prog=document.getElementById('k-vote-prog');prog.innerHTML='';
+  K.players.forEach((_,i)=>{const pip=document.createElement('div');pip.className='vpip'+(i<K.vi?' done':i===K.vi?' active':'');prog.appendChild(pip);});
+  document.getElementById('k-vflip').classList.remove('flipped');
+  document.getElementById('k-btn-next-vote').style.display='none';
+  document.getElementById('k-vflip-back').innerHTML='';
+}
+function kOpenVote(){
+  if(K.vOpened)return;K.vOpened=true;
+  const back=document.getElementById('k-vflip-back');back.innerHTML='';
+  K.players.forEach((name,i)=>{
+    if(i===K.vi)return;
+    const btn=document.createElement('button');btn.className='v-option';
+    btn.innerHTML=`<div class="v-av">${name.charAt(0)}</div>${esc(name)}`;
+    btn.onclick=()=>{document.querySelectorAll('#k-vflip-back .v-option').forEach(b=>b.classList.remove('picked'));btn.classList.add('picked');K.chosen=i;document.getElementById('k-btn-next-vote').style.display='flex';};
+    back.appendChild(btn);
+  });
+  document.getElementById('k-vflip').classList.add('flipped');
+}
+function kNextVote(){
+  if(K.chosen===null){showToast('اختر لاعباً');return;}
+  K.votes[K.vi]=K.chosen;
+  document.getElementById('k-vflip').classList.remove('flipped');
+  K.vOpened=false;K.chosen=null;
+  setTimeout(()=>{K.vi++;if(K.vi<K.players.length){kSetupVote();}else{kShowVoteResult();}},320);
+}
+
+function kShowVoteResult(){
+  // Tally
+  const tally={};K.players.forEach((_,i)=>tally[i]=0);
+  Object.values(K.votes).forEach(t=>{tally[t]=(tally[t]||0)+1;});
+  const maxV=Math.max(...Object.values(tally));
+  const top=Object.entries(tally).filter(([,v])=>v===maxV).map(([k])=>parseInt(k));
+  K.accusedIdx=top[Math.floor(Math.random()*top.length)];
+  const spyCaught=K.accusedIdx===K.spyIdx;
+
+  // كل من صوّت صح على الجاسوس يأخذ +٢ نقطة
+  Object.entries(K.votes).forEach(([vi,ti])=>{
+    if(parseInt(ti)===K.spyIdx){
+      const name=K.players[parseInt(vi)];
+      K.delta[name]+=2;scores[name]=(scores[name]||0)+2;ensureScore(name);
+    }
+          }.screen{display:none;flex-direction:column;flex:1;overflow:hidden;padding:0 20px 16px}
 .screen.active{display:flex;animation:sIn 0.38s cubic-bezier(0.22,1,0.36,1) both}
 @keyframes sIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 /* COMMON */
